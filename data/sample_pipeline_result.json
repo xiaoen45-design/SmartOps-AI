@@ -1,0 +1,31 @@
+{
+  "case_id": "DEMO-001",
+  "room_id": "Room 305",
+  "complaint_text": "The room air conditioner is running but is not cooling properly.",
+  "execution_status": "SUCCESS",
+  "pipeline_result": {
+    "classification": {
+      "category": "D30 HVAC",
+      "confidence": 0.94,
+      "is_out_of_kb": false
+    },
+    "selected_candidate": {
+      "metadata": {
+        "component": "D3050 Terminal & Package Units",
+        "failure_mode": "Cooling performance issue",
+        "severity": "medium",
+        "safety_flag": false
+      }
+    },
+    "governance_decision": {
+      "requires_human_review": false,
+      "approval_status": "AUTO_APPROVED",
+      "priority": "P3_STANDARD"
+    },
+    "recommendation": {
+      "corrective_action": "Inspect the air-conditioning unit and verify cooling performance after servicing.",
+      "preventive_maintenance": "Include the unit in routine inspection and cleaning schedules.",
+      "verification": "Confirm that the room reaches the expected temperature range after repair."
+    }
+  }
+}

@@ -1,0 +1,2185 @@
+/*
+ * SmartOps Source: assets/css/admin/responsive.css
+ * Purpose: Css / Admin: Responsive visual styling and responsive layout rules.
+ *
+ * Developer Guide section map: Base/Layout, Navigation, Header, KPI Cards,
+ * Cards/Charts, Tables/Filters, Buttons/Forms, Modals, and Responsive Rules.
+ */
+
+/* ================================================================
+   SmartOps responsive viewport layer
+   ----------------------------------------------------------------
+   Purpose:
+   - Remove fixed browser zoom scaling (0.90 / 0.82).
+   - Let the admin portal size itself from the real viewport.
+   - Keep the four main dashboards inside one real viewport on laptops/desktops.
+   - Distribute dashboard height fluidly with CSS Grid instead of fixed sizing.
+   - Preserve natural scrolling for detail pages, tablets and narrow devices.
+   - Make sidebar, spacing, cards and headings fluid without browser zoom.
+   ================================================================ */
+
+
+/* ==========================================================================
+   SECTION: Base and Page Layout
+   ========================================================================== */
+html {
+  zoom: 1 !important;
+  width: 100%;
+  min-height: 100%;
+}
+
+body.admin-dashboard-page {
+  width: 100%;
+  min-width: 0;
+  min-height: 100dvh !important;
+  overflow-x: hidden;
+}
+
+.admin-dashboard-page .layout,
+.admin-dashboard-page .dashboard {
+  width: 100%;
+  min-width: 0;
+  min-height: 100dvh !important;
+}
+
+/* Fluid desktop sidebar: it becomes slightly narrower on smaller laptops. */
+
+/* ==========================================================================
+   SECTION: Sidebar and Navigation
+   ========================================================================== */
+.admin-dashboard-page .sidebar {
+  flex: 0 0 clamp(184px, 15.25vw, 220px);
+  width: clamp(184px, 15.25vw, 220px) !important;
+  min-width: clamp(184px, 15.25vw, 220px) !important;
+  padding: clamp(14px, 1.4vw, 20px) clamp(12px, 1.25vw, 18px);
+}
+
+.admin-dashboard-page .brand,
+.admin-dashboard-page .logo {
+  margin-bottom: clamp(24px, 2.7vw, 38px);
+}
+
+.admin-dashboard-page .brand h2,
+.admin-dashboard-page .logo h2 {
+  font-size: clamp(22px, 1.8vw, 26px);
+}
+
+.admin-dashboard-page .nav,
+.admin-dashboard-page .sidebar nav {
+  gap: clamp(8px, 1vw, 14px);
+}
+
+.admin-dashboard-page .nav a,
+.admin-dashboard-page .sidebar nav a {
+  min-height: clamp(44px, 3.5vw, 50px);
+  padding: clamp(10px, .95vw, 14px) clamp(11px, 1.1vw, 16px);
+  font-size: clamp(12px, .95vw, 14px);
+}
+
+.admin-dashboard-page .main,
+.admin-dashboard-page .main-content,
+.admin-dashboard-page .main.dashboard-page {
+  width: auto;
+  min-width: 0;
+  padding-left: clamp(14px, 1.4vw, 20px);
+  padding-right: clamp(14px, 1.4vw, 20px);
+}
+
+
+/* ==========================================================================
+   SECTION: Top Bar and Page Header
+   ========================================================================== */
+.admin-dashboard-page .topbar h1 {
+  font-size: clamp(23px, 2vw, 28px);
+}
+
+.admin-dashboard-page .topbar p {
+  font-size: clamp(12px, 1vw, 15px);
+}
+
+/* Prevent long labels/numbers from forcing the whole dashboard wider. */
+.admin-dashboard-page .kpi-card,
+.admin-dashboard-page .kpi,
+.admin-dashboard-page .card,
+.admin-dashboard-page .chart-card,
+.admin-dashboard-page .route-card,
+.admin-dashboard-page .alert-box,
+.admin-dashboard-page .action-card {
+  min-width: 0;
+}
+
+.admin-dashboard-page h1,
+.admin-dashboard-page h2,
+.admin-dashboard-page h3,
+.admin-dashboard-page p,
+.admin-dashboard-page td,
+.admin-dashboard-page th {
+  overflow-wrap: anywhere;
+}
+
+/* Large desktop: use the REAL viewport, not calc(100vh / browser zoom). */
+
+/* ==========================================================================
+   SECTION: Responsive Rules
+   ========================================================================== */
+@media (min-width: 1800px) and (min-height: 900px) {
+  body.admin-dashboard-page:not(.admin-detail-page) {
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    overflow-y: hidden !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .layout,
+  body.admin-dashboard-page:not(.admin-detail-page) .dashboard,
+  body.admin-dashboard-page:not(.admin-detail-page) .sidebar,
+  body.admin-dashboard-page:not(.admin-detail-page) .main.dashboard-page {
+    height: 100dvh !important;
+    min-height: 0 !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .main.dashboard-page {
+    overflow: hidden !important;
+  }
+}
+
+/* Laptop / small desktop: keep sidebar, but scroll naturally vertically. */
+@media (min-width: 901px) and (max-width: 1280px) {
+  body.admin-dashboard-page {
+    height: auto !important;
+    min-height: 100dvh !important;
+    overflow-y: auto !important;
+  }
+
+  .admin-dashboard-page .layout,
+  .admin-dashboard-page .dashboard {
+    height: auto !important;
+    min-height: 100dvh !important;
+    align-items: stretch;
+  }
+
+  .admin-dashboard-page .sidebar {
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+  }
+
+  .admin-dashboard-page .main.dashboard-page {
+    height: auto !important;
+    min-height: 100dvh !important;
+    overflow: visible !important;
+  }
+
+  /* Use available width more smoothly instead of a sudden fixed 2-column jump. */
+  .admin-dashboard-page .overview-kpi-grid,
+  .admin-dashboard-page .smart-kpi-grid,
+  .admin-dashboard-page .kpis.five,
+
+/* ==========================================================================
+   SECTION: KPI Cards and Summary Metrics
+   ========================================================================== */
+  .admin-dashboard-page .technician-management-kpis {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
+  }
+}
+
+/* Tablet / mobile: stack sidebar above content. */
+@media (max-width: 900px) {
+  body.admin-dashboard-page {
+    height: auto !important;
+    min-height: 100dvh !important;
+    overflow-y: auto !important;
+  }
+
+  .admin-dashboard-page .layout,
+  .admin-dashboard-page .dashboard {
+    height: auto !important;
+    min-height: 100dvh !important;
+    flex-direction: column;
+  }
+
+  .admin-dashboard-page .sidebar {
+    position: static;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 14px;
+  }
+
+  .admin-dashboard-page .brand,
+  .admin-dashboard-page .logo {
+    margin-bottom: 14px;
+  }
+
+  .admin-dashboard-page .main.dashboard-page {
+    width: 100%;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  .admin-dashboard-page .topbar {
+    align-items: stretch;
+  }
+
+  .admin-dashboard-page .overview-kpi-grid,
+  .admin-dashboard-page .smart-kpi-grid,
+  .admin-dashboard-page .kpis.five,
+  .admin-dashboard-page .technician-management-kpis,
+
+/* ==========================================================================
+   SECTION: Tables and Filters
+   ========================================================================== */
+  .admin-dashboard-page .management-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 620px) {
+  .admin-dashboard-page .topbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .admin-dashboard-page .live-clock {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .admin-dashboard-page .overview-kpi-grid,
+  .admin-dashboard-page .smart-kpi-grid,
+  .admin-dashboard-page .kpis.five,
+  .admin-dashboard-page .kpis.four,
+  .admin-dashboard-page .kpis.three,
+  .admin-dashboard-page .technician-management-kpis,
+  .admin-dashboard-page .management-filters {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Detail pages should always grow with their content. */
+body.admin-detail-page,
+body.admin-detail-page .layout,
+body.admin-detail-page .dashboard,
+body.admin-detail-page .main.dashboard-page {
+  height: auto !important;
+  min-height: 100dvh !important;
+}
+
+body.admin-detail-page {
+  overflow-y: auto !important;
+}
+
+@media (min-width: 901px) {
+  body.admin-detail-page .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+  }
+}
+
+/* =====================================================================
+   Fluid one-screen dashboards for laptop + monitor
+   ---------------------------------------------------------------------
+   This layer deliberately avoids browser zoom and fixed dashboard heights.
+   For normal laptop/desktop viewports, each of the four MAIN dashboards is
+   laid out inside the real 100dvh viewport. CSS Grid distributes the usable
+   height proportionally, while clamp() scales spacing and typography.
+   Detail / drill-through pages are excluded and continue to scroll normally.
+   ===================================================================== */
+
+@media (min-width: 1100px) and (min-height: 600px) {
+  body.admin-dashboard-page:not(.admin-detail-page) {
+    --dash-gap: clamp(5px, 0.85dvh, 10px);
+    --dash-pad-y: clamp(7px, 1.15dvh, 12px);
+    --dash-pad-x: clamp(12px, 1.35vw, 20px);
+    --dash-card-pad-y: clamp(7px, 1.05dvh, 13px);
+    --dash-card-pad-x: clamp(10px, 1.05vw, 14px);
+    --dash-title: clamp(21px, 2.9dvh, 28px);
+    --dash-subtitle: clamp(10px, 1.55dvh, 14px);
+    --dash-card-title: clamp(13px, 1.85dvh, 18px);
+    --dash-card-copy: clamp(9px, 1.35dvh, 12px);
+    --dash-kpi-value: clamp(21px, 3.5dvh, 29px);
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    overflow: hidden !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .layout,
+  body.admin-dashboard-page:not(.admin-detail-page) .dashboard {
+    width: 100%;
+    height: 100dvh !important;
+    min-height: 0 !important;
+    align-items: stretch;
+    overflow: hidden;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .sidebar {
+    position: relative !important;
+    top: auto !important;
+    align-self: stretch !important;
+    height: 100dvh !important;
+    min-height: 0 !important;
+    padding-top: clamp(12px, 2.2dvh, 20px);
+    padding-bottom: clamp(12px, 2.2dvh, 20px);
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .brand,
+  body.admin-dashboard-page:not(.admin-detail-page) .logo {
+    margin-bottom: clamp(18px, 3.3dvh, 38px);
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .nav,
+  body.admin-dashboard-page:not(.admin-detail-page) .sidebar nav {
+    gap: clamp(6px, 1.35dvh, 14px);
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .nav a,
+  body.admin-dashboard-page:not(.admin-detail-page) .sidebar nav a {
+    min-height: clamp(39px, 6.1dvh, 50px);
+    padding-top: clamp(7px, 1.45dvh, 14px);
+    padding-bottom: clamp(7px, 1.45dvh, 14px);
+    font-size: clamp(11px, 1.55dvh, 14px);
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .main.dashboard-page {
+    width: auto;
+    height: 100dvh !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    padding: var(--dash-pad-y) var(--dash-pad-x) !important;
+  }
+
+  /* Top bar scales with viewport height instead of holding a fixed block. */
+  body.admin-dashboard-page:not(.admin-detail-page) .topbar {
+    min-height: 0 !important;
+    margin: 0 !important;
+    gap: clamp(10px, 1.2vw, 18px);
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .topbar h1 {
+    font-size: var(--dash-title) !important;
+    line-height: 1.03 !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .topbar p {
+    margin-top: clamp(1px, 0.35dvh, 4px) !important;
+    font-size: var(--dash-subtitle) !important;
+    line-height: 1.2;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .live-clock {
+    width: clamp(205px, 17vw, 242px) !important;
+    min-width: clamp(205px, 17vw, 242px) !important;
+    min-height: clamp(52px, 8.4dvh, 70px) !important;
+    gap: clamp(8px, 1.2dvh, 12px);
+    padding: clamp(7px, 1.2dvh, 10px) clamp(10px, 1vw, 14px) !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .live-clock-icon {
+    width: clamp(32px, 5.1dvh, 40px);
+    height: clamp(32px, 5.1dvh, 40px);
+    flex-basis: clamp(32px, 5.1dvh, 40px);
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .live-clock-time {
+    font-size: clamp(17px, 2.75dvh, 22px);
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .live-clock-date {
+    font-size: clamp(9px, 1.35dvh, 11px);
+  }
+
+  /* Shared card density. No chart/card receives a fixed viewport-independent height. */
+  body.admin-dashboard-page:not(.admin-detail-page) .chart-card,
+  body.admin-dashboard-page:not(.admin-detail-page) .action-card,
+  body.admin-dashboard-page:not(.admin-detail-page) .card {
+    min-height: 0 !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .chart-card,
+  body.admin-dashboard-page:not(.admin-detail-page) .action-card {
+    padding: var(--dash-card-pad-y) var(--dash-card-pad-x) !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .chart-header,
+  body.admin-dashboard-page:not(.admin-detail-page) .table-header,
+
+/* ==========================================================================
+   SECTION: Cards and Charts
+   ========================================================================== */
+  body.admin-dashboard-page:not(.admin-detail-page) .chart-title-row {
+    margin-bottom: clamp(2px, 0.65dvh, 7px) !important;
+    gap: clamp(7px, 0.8vw, 12px);
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .chart-header h2,
+  body.admin-dashboard-page:not(.admin-detail-page) .table-header h2,
+  body.admin-dashboard-page:not(.admin-detail-page) .chart-title-row h2 {
+    font-size: var(--dash-card-title) !important;
+    line-height: 1.1;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .chart-header p,
+  body.admin-dashboard-page:not(.admin-detail-page) .table-header p,
+  body.admin-dashboard-page:not(.admin-detail-page) .chart-title-row p,
+  body.admin-dashboard-page:not(.admin-detail-page) .clean-title p {
+    margin-top: clamp(1px, 0.25dvh, 4px) !important;
+    font-size: var(--dash-card-copy) !important;
+    line-height: 1.25 !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .chart-box,
+body.admin-dashboard-page:not(.admin-detail-page) .smart-middle-chart-box,
+body.admin-dashboard-page:not(.admin-detail-page) .smart-lower-chart-box,
+body.admin-dashboard-page:not(.admin-detail-page) .hitl-trend-box,
+body.admin-dashboard-page:not(.admin-detail-page) .hitl-bottom-chart-box,
+body.admin-dashboard-page:not(.admin-detail-page) .sla-department-card .chart-box {
+    height: auto !important;
+    min-height: 0 !important;
+    flex: 1 1 auto;
+  }
+
+  /* ================================================================
+     1) Executive Overview
+     ================================================================ */
+
+  /* ================================================================
+     2) Smart Maintenance Intelligence
+     ================================================================ */
+  .smart-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    display: grid !important;
+    grid-template-rows:
+      auto
+      minmax(0, 0.58fr)
+      minmax(0, 0.86fr)
+      minmax(0, 1.38fr)
+      minmax(0, 1.52fr) !important;
+    gap: var(--dash-gap) !important;
+  }
+
+  .smart-dashboard-body .smart-kpi-grid,
+  .smart-dashboard-body .hitl-status-card,
+  .smart-dashboard-body .smart-trend-middle-card,
+  .smart-dashboard-body .smart-bottom-grid {
+    min-height: 0 !important;
+    height: 100% !important;
+    margin: 0 !important;
+  }
+
+  .smart-dashboard-body .smart-kpi-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: var(--dash-gap) !important;
+  }
+
+  .smart-dashboard-body .smart-kpi-grid .kpi-card {
+    min-height: 0 !important;
+    height: 100% !important;
+    padding: clamp(6px, 0.95dvh, 9px) clamp(9px, 0.95vw, 13px) !important;
+  }
+
+  .smart-dashboard-body .smart-kpi-grid .kpi-card h3 {
+    margin-bottom: clamp(1px, 0.35dvh, 4px) !important;
+    font-size: clamp(11px, 1.65dvh, 14px) !important;
+  }
+
+  .smart-dashboard-body .smart-kpi-grid .kpi-card h2 {
+    font-size: clamp(20px, 3.2dvh, 24px) !important;
+  }
+
+  .smart-dashboard-body .smart-kpi-grid .kpi-card p {
+    margin-top: clamp(1px, 0.35dvh, 4px) !important;
+    font-size: clamp(8px, 1.2dvh, 10.5px) !important;
+  }
+
+  .smart-dashboard-body .hitl-status-card,
+  .smart-dashboard-body .smart-trend-middle-card,
+  .smart-dashboard-body .smart-bottom-grid .chart-card {
+    display: flex !important;
+    flex-direction: column;
+  }
+
+  .smart-dashboard-body .hitl-status-grid {
+    min-height: 0;
+    flex: 1 1 auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: var(--dash-gap) !important;
+  }
+
+  .smart-dashboard-body .hitl-status-panel {
+    min-height: 0 !important;
+    height: 100% !important;
+    gap: clamp(7px, 0.9vw, 14px) !important;
+    padding: clamp(6px, 0.9dvh, 11px) clamp(10px, 1.05vw, 16px) !important;
+  }
+
+  .smart-dashboard-body .hitl-status-icon {
+    width: clamp(34px, 5.6dvh, 50px) !important;
+    height: clamp(34px, 5.6dvh, 50px) !important;
+    flex-basis: clamp(34px, 5.6dvh, 50px) !important;
+    font-size: clamp(20px, 3.5dvh, 30px) !important;
+  }
+
+  .smart-dashboard-body .hitl-status-panel strong {
+    font-size: clamp(20px, 3.35dvh, 27px) !important;
+  }
+
+  .smart-dashboard-body .hitl-status-panel h3 {
+    margin-top: clamp(1px, 0.35dvh, 4px) !important;
+    font-size: clamp(12px, 1.8dvh, 16px) !important;
+  }
+
+  .smart-dashboard-body .hitl-status-panel p {
+    margin-top: clamp(1px, 0.25dvh, 2px) !important;
+    font-size: clamp(9px, 1.25dvh, 11px) !important;
+  }
+
+  .smart-dashboard-body .smart-bottom-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: var(--dash-gap) !important;
+  }
+
+  .smart-dashboard-body .smart-bottom-grid .chart-card {
+    min-height: 0 !important;
+    height: 100% !important;
+  }
+
+  /* ================================================================
+     3) Human-In-The-Loop Escalation
+     ================================================================ */
+  .hitl-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    display: grid !important;
+    grid-template-rows:
+      auto
+      minmax(0, 0.75fr)
+      minmax(0, 0.68fr)
+      minmax(0, 1.48fr)
+      minmax(0, 1.28fr) !important;
+    gap: var(--dash-gap) !important;
+  }
+
+  .hitl-dashboard-body .hitl-action-banner,
+  .hitl-dashboard-body .hitl-redesign-kpis,
+  .hitl-dashboard-body .hitl-trend-full,
+  .hitl-dashboard-body .hitl-third-layer {
+    min-height: 0 !important;
+    height: 100% !important;
+    margin: 0 !important;
+  }
+
+  .hitl-dashboard-body .hitl-action-banner {
+    padding: clamp(7px, 1dvh, 13px) clamp(11px, 1.1vw, 16px) !important;
+    gap: clamp(10px, 1.3vw, 20px) !important;
+  }
+
+  .hitl-dashboard-body .hitl-action-banner h2 {
+    font-size: clamp(13px, 1.85dvh, 17px) !important;
+    line-height: 1.12;
+  }
+
+  .hitl-dashboard-body .hitl-action-banner p {
+    margin-top: clamp(1px, 0.35dvh, 4px) !important;
+    font-size: clamp(9px, 1.35dvh, 12px) !important;
+    line-height: 1.25;
+  }
+
+  .hitl-dashboard-body .hitl-action-count strong {
+    font-size: clamp(20px, 3.4dvh, 27px) !important;
+  }
+
+  .hitl-dashboard-body .hitl-redesign-kpis {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: var(--dash-gap) !important;
+  }
+
+  .hitl-dashboard-body .hitl-redesign-kpis .kpi {
+    min-height: 0 !important;
+    height: 100% !important;
+    padding: clamp(6px, 0.95dvh, 12px) clamp(9px, 0.95vw, 14px) !important;
+  }
+
+  .hitl-dashboard-body .hitl-redesign-kpis .kpi h3 {
+    margin-bottom: clamp(2px, 0.45dvh, 6px) !important;
+    font-size: clamp(9px, 1.4dvh, 12px) !important;
+    line-height: 1.2;
+  }
+
+  .hitl-dashboard-body .hitl-redesign-kpis .kpi h2 {
+    font-size: clamp(20px, 3.25dvh, 25px) !important;
+  }
+
+  .hitl-dashboard-body .hitl-redesign-kpis .kpi p {
+    margin-top: clamp(2px, 0.45dvh, 6px) !important;
+    font-size: clamp(8px, 1.15dvh, 11px) !important;
+  }
+
+  .hitl-dashboard-body .hitl-trend-full,
+  .hitl-dashboard-body .hitl-third-layer .chart-card {
+    display: flex !important;
+    flex-direction: column;
+  }
+
+  .hitl-dashboard-body .hitl-third-layer {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: var(--dash-gap) !important;
+  }
+
+  .hitl-dashboard-body .hitl-third-layer .chart-card {
+    min-height: 0 !important;
+    height: 100% !important;
+  }
+
+  /* ================================================================
+     4) Workforce & Task Monitoring
+     ================================================================ */
+  .workforce-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    display: grid !important;
+    grid-template-rows:
+      auto
+      minmax(0, 0.68fr)
+      minmax(0, 4.0fr) !important;
+    gap: var(--dash-gap) !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-redesign-kpis,
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-two-col-grid {
+    min-height: 0 !important;
+    height: 100% !important;
+    margin: 0 !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-redesign-kpis {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: var(--dash-gap) !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-redesign-kpis .kpi {
+    min-height: 0 !important;
+    height: 100% !important;
+    padding: clamp(6px, 0.95dvh, 14px) clamp(9px, 0.95vw, 16px) !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-redesign-kpis .kpi h3 {
+    margin-bottom: clamp(2px, 0.45dvh, 7px) !important;
+    font-size: clamp(9px, 1.4dvh, 13px) !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-redesign-kpis .kpi h2 {
+    font-size: clamp(20px, 3.35dvh, 28px) !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-redesign-kpis .kpi p {
+    margin-top: clamp(2px, 0.5dvh, 8px) !important;
+    font-size: clamp(8px, 1.25dvh, 12px) !important;
+    line-height: 1.2 !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-two-col-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
+    gap: var(--dash-gap) !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-two-col-grid > .card {
+    min-height: 0 !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column;
+    padding: var(--dash-card-pad-y) var(--dash-card-pad-x) !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .action-section {
+    min-height: 0 !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .support-action-grid {
+    min-height: 0 !important;
+    flex: 1 1 auto;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: var(--dash-gap) !important;
+    margin-top: clamp(3px, 0.65dvh, 14px) !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .support-action-card {
+    min-height: 0 !important;
+    height: 100% !important;
+    padding: clamp(7px, 1dvh, 16px) !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .support-action-label {
+    font-size: clamp(10px, 1.5dvh, 14px) !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .support-action-card strong {
+    margin-top: clamp(3px, 0.65dvh, 10px) !important;
+    font-size: clamp(20px, 3.4dvh, 30px) !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .support-action-card p {
+    margin-top: clamp(3px, 0.65dvh, 10px) !important;
+    font-size: clamp(8px, 1.2dvh, 12px) !important;
+    line-height: 1.25 !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .support-action-link {
+    padding-top: clamp(3px, 0.65dvh, 12px) !important;
+    font-size: clamp(9px, 1.25dvh, 12px) !important;
+  }
+}
+
+/* Short laptop screens receive a denser—but still fluid—spacing profile.
+   No browser zoom is used; only proportional viewport sizing changes. */
+@media (min-width: 1100px) and (min-height: 600px) and (max-height: 780px) {
+  body.admin-dashboard-page:not(.admin-detail-page) {
+    --dash-gap: clamp(4px, 0.65dvh, 7px);
+    --dash-pad-y: clamp(5px, 0.8dvh, 8px);
+    --dash-card-pad-y: clamp(5px, 0.8dvh, 9px);
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .sidebar {
+    padding-top: clamp(9px, 1.45dvh, 13px);
+    padding-bottom: clamp(9px, 1.45dvh, 13px);
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .brand,
+  body.admin-dashboard-page:not(.admin-detail-page) .logo {
+    margin-bottom: clamp(13px, 2.2dvh, 20px);
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .nav,
+  body.admin-dashboard-page:not(.admin-detail-page) .sidebar nav {
+    gap: clamp(5px, 0.9dvh, 8px);
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .nav a,
+  body.admin-dashboard-page:not(.admin-detail-page) .sidebar nav a {
+    min-height: clamp(37px, 5.6dvh, 43px);
+  }
+}
+
+/* Below laptop/dashboard width, fall back to the normal responsive flow.
+   These smaller devices may scroll because preserving readability takes
+   precedence over forcing five-column executive layouts into a narrow view. */
+@media (max-width: 1099px), (max-height: 599px) {
+  body.admin-dashboard-page:not(.admin-detail-page) {
+    height: auto !important;
+    min-height: 100dvh !important;
+    overflow-y: auto !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .layout,
+  body.admin-dashboard-page:not(.admin-detail-page) .dashboard,
+  body.admin-dashboard-page:not(.admin-detail-page) .main.dashboard-page {
+    height: auto !important;
+    min-height: 100dvh !important;
+    overflow: visible !important;
+  }
+}
+
+/* =====================================================================
+   Natural laptop one-screen balance
+   ---------------------------------------------------------------------
+   The layout divided EVERY dashboard section with fr units. That kept
+   everything on one screen, but made KPI/alert rows feel vertically
+   compressed on laptops. In , content sections (header, KPI, banners,
+   alerts) use their natural content height. Only chart regions share the
+   remaining viewport space. This keeps the dashboard one-screen without
+   browser zoom and without a single fixed pixel layout.
+   ===================================================================== */
+
+@media (min-width: 1100px) and (min-height: 600px) {
+  body.admin-dashboard-page:not(.admin-detail-page) {
+    /* Readable typography: scale mainly with width, not viewport height. */
+    --dash-gap: clamp(7px, 0.75vw, 12px);
+    --dash-pad-y: clamp(8px, 1dvh, 12px);
+    --dash-pad-x: clamp(14px, 1.35vw, 22px);
+    --dash-card-pad-y: clamp(9px, 0.85dvh, 13px);
+    --dash-card-pad-x: clamp(12px, 1vw, 16px);
+    --dash-title: clamp(26px, 1.85vw, 32px);
+    --dash-subtitle: clamp(12.5px, 0.82vw, 15px);
+    --dash-card-title: clamp(15px, 1.05vw, 18px);
+    --dash-card-copy: clamp(10.5px, 0.72vw, 13px);
+    --dash-kpi-value: clamp(27px, 1.9vw, 34px);
+  }
+
+  /* Keep the top area compact naturally instead of shrinking its text. */
+  body.admin-dashboard-page:not(.admin-detail-page) .topbar {
+    align-items: flex-start;
+    padding: 0 !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .topbar h1 {
+    font-size: var(--dash-title) !important;
+    line-height: 1.05 !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .topbar p {
+    font-size: var(--dash-subtitle) !important;
+    line-height: 1.25 !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .chart-header h2,
+  body.admin-dashboard-page:not(.admin-detail-page) .table-header h2,
+  body.admin-dashboard-page:not(.admin-detail-page) .chart-title-row h2,
+  body.admin-dashboard-page:not(.admin-detail-page) .clean-title h2 {
+    font-size: var(--dash-card-title) !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .chart-header p,
+  body.admin-dashboard-page:not(.admin-detail-page) .table-header p,
+  body.admin-dashboard-page:not(.admin-detail-page) .chart-title-row p,
+  body.admin-dashboard-page:not(.admin-detail-page) .clean-title p {
+    font-size: var(--dash-card-copy) !important;
+  }
+
+  /* ================================================================
+     Executive Overview
+     Header / KPI / Operational Alert are content-height.
+     Trend and bottom row share only the remaining space.
+     ================================================================ */
+
+  /* ================================================================
+     Smart Maintenance Intelligence
+     KPI and HITL status keep natural height; charts take remainder.
+     ================================================================ */
+  .smart-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    grid-template-rows:
+      auto
+      auto
+      auto
+      minmax(0, 1.18fr)
+      minmax(0, 1fr) !important;
+  }
+
+  .smart-dashboard-body .smart-kpi-grid,
+  .smart-dashboard-body .hitl-status-card {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .smart-dashboard-body .smart-kpi-grid .kpi-card {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: clamp(9px, 0.85dvh, 13px) clamp(12px, 1vw, 16px) !important;
+  }
+
+  .smart-dashboard-body .smart-kpi-grid .kpi-card h3 {
+    font-size: clamp(13px, 0.92vw, 15px) !important;
+  }
+
+  .smart-dashboard-body .smart-kpi-grid .kpi-card h2 {
+    font-size: clamp(26px, 1.85vw, 32px) !important;
+  }
+
+  .smart-dashboard-body .smart-kpi-grid .kpi-card p {
+    font-size: clamp(10px, 0.7vw, 12px) !important;
+    line-height: 1.2 !important;
+  }
+
+  .smart-dashboard-body .hitl-status-grid {
+    flex: none !important;
+  }
+
+  .smart-dashboard-body .hitl-status-panel {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: clamp(9px, 0.9dvh, 13px) clamp(13px, 1.05vw, 17px) !important;
+  }
+
+  .smart-dashboard-body .hitl-status-panel strong {
+    font-size: clamp(25px, 1.8vw, 31px) !important;
+  }
+
+  .smart-dashboard-body .hitl-status-panel h3 {
+    font-size: clamp(13px, 0.95vw, 16px) !important;
+  }
+
+  .smart-dashboard-body .hitl-status-panel p {
+    font-size: clamp(10px, 0.7vw, 12px) !important;
+  }
+
+  .smart-dashboard-body .smart-trend-middle-card,
+  .smart-dashboard-body .smart-bottom-grid,
+  .smart-dashboard-body .smart-bottom-grid .chart-card {
+    min-height: 0 !important;
+    height: 100% !important;
+  }
+
+  /* ================================================================
+     HITL Escalation
+     Banner and KPI cards use natural height; chart rows stay fluid.
+     ================================================================ */
+  .hitl-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    grid-template-rows:
+      auto
+      auto
+      auto
+      minmax(0, 1.18fr)
+      minmax(0, 1fr) !important;
+  }
+
+  .hitl-dashboard-body .hitl-action-banner,
+  .hitl-dashboard-body .hitl-redesign-kpis {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .hitl-dashboard-body .hitl-action-banner {
+    padding: clamp(10px, 0.9dvh, 14px) clamp(14px, 1.15vw, 18px) !important;
+  }
+
+  .hitl-dashboard-body .hitl-action-banner h2 {
+    font-size: clamp(15px, 1.05vw, 18px) !important;
+  }
+
+  .hitl-dashboard-body .hitl-action-banner p {
+    font-size: clamp(10.5px, 0.72vw, 12.5px) !important;
+  }
+
+  .hitl-dashboard-body .hitl-action-count strong {
+    font-size: clamp(26px, 1.9vw, 33px) !important;
+  }
+
+  .hitl-dashboard-body .hitl-redesign-kpis .kpi {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: clamp(9px, 0.85dvh, 13px) clamp(11px, 0.9vw, 15px) !important;
+  }
+
+  .hitl-dashboard-body .hitl-redesign-kpis .kpi h3 {
+    font-size: clamp(10.5px, 0.74vw, 12.5px) !important;
+  }
+
+  .hitl-dashboard-body .hitl-redesign-kpis .kpi h2 {
+    font-size: clamp(25px, 1.75vw, 31px) !important;
+  }
+
+  .hitl-dashboard-body .hitl-redesign-kpis .kpi p {
+    font-size: clamp(9.5px, 0.66vw, 11.5px) !important;
+    line-height: 1.2 !important;
+  }
+
+  .hitl-dashboard-body .hitl-trend-full,
+  .hitl-dashboard-body .hitl-third-layer,
+  .hitl-dashboard-body .hitl-third-layer .chart-card {
+    min-height: 0 !important;
+    height: 100% !important;
+  }
+
+  /* ================================================================
+     Workforce & Task Monitoring
+     KPI row is intrinsic; the 2x2 operational grid gets the rest.
+     ================================================================ */
+  .workforce-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    grid-template-rows:
+      auto
+      auto
+      minmax(0, 1fr) !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-redesign-kpis {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-redesign-kpis .kpi {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: clamp(9px, 0.85dvh, 13px) clamp(11px, 0.9vw, 15px) !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-redesign-kpis .kpi h3 {
+    font-size: clamp(10.5px, 0.74vw, 12.5px) !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-redesign-kpis .kpi h2 {
+    font-size: clamp(25px, 1.8vw, 32px) !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-redesign-kpis .kpi p {
+    font-size: clamp(9.5px, 0.68vw, 11.5px) !important;
+    line-height: 1.2 !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-two-col-grid {
+    min-height: 0 !important;
+    height: 100% !important;
+  }
+}
+
+/* Very short laptop windows: preserve the same natural hierarchy but trim
+   vertical padding only. Typography stays readable and is not globally
+   scaled down. */
+@media (min-width: 1100px) and (min-height: 600px) and (max-height: 760px) {
+  body.admin-dashboard-page:not(.admin-detail-page) {
+    --dash-gap: clamp(5px, 0.55vw, 8px);
+    --dash-pad-y: 6px;
+    --dash-card-pad-y: 7px;
+  }
+
+  .smart-dashboard-body .smart-kpi-grid .kpi-card,
+.hitl-dashboard-body .hitl-redesign-kpis .kpi,
+.workforce-dashboard-body .workforce-redesign-kpis .kpi {
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
+  }
+
+  .smart-dashboard-body .hitl-status-panel,
+.hitl-dashboard-body .hitl-action-banner {
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
+  }
+}
+
+
+/* =====================================================================
+   Smart Maintenance routing summary + tighter trend chart
+   ===================================================================== */
+@media (min-width: 1100px) and (min-height: 600px) {
+  .smart-dashboard-body .routing-status-panel {
+    min-height: clamp(72px, 9.4dvh, 94px) !important;
+    height: auto !important;
+    padding: clamp(10px, 1dvh, 14px) clamp(15px, 1.05vw, 18px) !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel h3 {
+    margin: 0 0 clamp(3px, .4dvh, 6px) !important;
+    font-size: clamp(14px, .95vw, 16px) !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel strong {
+    font-size: clamp(24px, 1.75vw, 30px) !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel .case-unit {
+    font-size: .5em !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel p {
+    margin-top: clamp(3px, .4dvh, 6px) !important;
+    font-size: clamp(10px, .7vw, 12px) !important;
+  }
+
+  /* Give slightly less of the remaining height to the trend card because its
+     internal Chart.js padding is now tighter; this prevents a hollow lower area. */
+  .smart-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    grid-template-rows:
+      auto
+      auto
+      auto
+      minmax(0, 1.02fr)
+      minmax(0, 1fr) !important;
+  }
+}
+
+
+/* =====================================================================
+   Four-dashboard trend density + terminology alignment
+   ---------------------------------------------------------------------
+   Keep content-height KPI/banner rows. Trend rows use a smaller share of
+   the remaining viewport so Chart.js does not leave a hollow lower area.
+   All sizing remains viewport-fluid; no browser zoom or fixed chart height.
+   ===================================================================== */
+@media (min-width: 1100px) and (min-height: 600px) {
+  /* Executive Overview: slightly more room to the lower operational row. */
+
+  /* Smart Maintenance: compact the daily trend and let both lower charts
+     use the recovered space. */
+  .smart-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    grid-template-rows:
+      auto
+      auto
+      auto
+      minmax(0, 0.82fr)
+      minmax(0, 1.08fr) !important;
+  }
+
+  /* HITL: same balance for the line-trend row versus the two lower charts. */
+  .hitl-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    grid-template-rows:
+      auto
+      auto
+      auto
+      minmax(0, 0.86fr)
+      minmax(0, 1.08fr) !important;
+  }
+
+  /* Make trend canvases consume their card cleanly without an artificial
+     minimum height inherited from module CSS. */
+  .smart-dashboard-body .smart-trend-middle-card,
+.hitl-dashboard-body .hitl-trend-full {
+    overflow: hidden;
+  }
+
+  .smart-dashboard-body .smart-middle-chart-box,
+.hitl-dashboard-body .hitl-trend-box {
+    min-height: 0 !important;
+    height: auto !important;
+    flex: 1 1 0 !important;
+  }
+
+  .smart-dashboard-body .smart-middle-chart-box canvas,
+.hitl-dashboard-body .hitl-trend-box canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* Workforce has no line-trend chart, but keep its four operational cards
+     evenly fluid so the dashboard follows the same one-screen behaviour. */
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-two-col-grid {
+    grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* On shorter laptops, reclaim a little more vertical space from the trend
+   rows while keeping readable headings and KPI cards. */
+@media (min-width: 1100px) and (min-height: 600px) and (max-height: 780px) {
+  .smart-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    grid-template-rows: auto auto auto minmax(0, 0.72fr) minmax(0, 1.04fr) !important;
+  }
+  .hitl-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    grid-template-rows: auto auto auto minmax(0, 0.76fr) minmax(0, 1.04fr) !important;
+  }
+}
+
+/* =====================================================================
+   Smart Maintenance routing summary compact balance
+   ---------------------------------------------------------------------
+   The routing summary is informational, so it should size to its content
+   instead of consuming a full dashboard row. Recovered viewport height is
+   left to the trend and lower analysis charts. All values stay fluid.
+   ===================================================================== */
+@media (min-width: 1100px) and (min-height: 600px) {
+  .smart-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    grid-template-rows:
+      auto
+      auto
+      auto
+      minmax(0, 0.98fr)
+      minmax(0, 1.14fr) !important;
+  }
+
+  .smart-dashboard-body .routing-summary-card {
+    height: auto !important;
+    min-height: 0 !important;
+    align-self: start;
+    padding: clamp(8px, 0.9dvh, 11px) clamp(11px, 0.9vw, 14px) !important;
+  }
+
+  .smart-dashboard-body .routing-summary-card .chart-header {
+    margin-bottom: clamp(5px, 0.55dvh, 7px) !important;
+  }
+
+  .smart-dashboard-body .routing-summary-card .chart-header h2 {
+    font-size: clamp(16px, 1.05vw, 18px) !important;
+    line-height: 1.08 !important;
+  }
+
+  .smart-dashboard-body .routing-summary-card .chart-header p {
+    margin-top: 2px !important;
+    font-size: clamp(10px, 0.72vw, 12px) !important;
+    line-height: 1.2 !important;
+  }
+
+  .smart-dashboard-body .routing-status-grid {
+    flex: 0 0 auto !important;
+    min-height: 0 !important;
+    gap: clamp(8px, 0.7vw, 11px) !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel {
+    min-height: clamp(58px, 7.2dvh, 72px) !important;
+    height: auto !important;
+    padding: clamp(7px, 0.65dvh, 9px) clamp(13px, 0.9vw, 16px) !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel h3 {
+    margin-bottom: clamp(2px, 0.25dvh, 4px) !important;
+    font-size: clamp(13px, 0.9vw, 15px) !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel strong {
+    font-size: clamp(21px, 1.55vw, 26px) !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel p {
+    margin-top: clamp(2px, 0.25dvh, 4px) !important;
+    font-size: clamp(9.5px, 0.68vw, 11px) !important;
+  }
+
+  /* The chart rows receive the height released by the compact summary. */
+  .smart-dashboard-body .smart-trend-middle-card,
+  .smart-dashboard-body .smart-bottom-grid,
+  .smart-dashboard-body .smart-bottom-grid .chart-card {
+    min-height: 0 !important;
+  }
+}
+
+/* Shorter laptops: keep the routing summary compact without shrinking text
+   excessively, and prioritise both analytical chart rows. */
+@media (min-width: 1100px) and (min-height: 600px) and (max-height: 780px) {
+  .smart-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    grid-template-rows: auto auto auto minmax(0, 0.92fr) minmax(0, 1.08fr) !important;
+  }
+
+  .smart-dashboard-body .routing-summary-card {
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel {
+    min-height: 54px !important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+  }
+}
+
+/* =====================================================================
+   Compact shared live clock + stronger dashboard number hierarchy
+   ---------------------------------------------------------------------
+   The shared live clock previously became the tallest item in the topbar
+   on laptops, so the whole header row reserved more vertical space than the
+   title actually needed. Keep all clock information, but make the component
+   intrinsically compact. The recovered height automatically flows to the
+   chart rows because the four main dashboards use fluid CSS Grid tracks.
+   ===================================================================== */
+@media (min-width: 1100px) and (min-height: 600px) {
+  /* Shared by Executive, Smart Maintenance, HITL and Workforce. */
+  body.admin-dashboard-page:not(.admin-detail-page) .topbar {
+    align-items: center !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .live-clock {
+    width: clamp(198px, 14.5vw, 218px) !important;
+    min-width: clamp(198px, 14.5vw, 218px) !important;
+    min-height: clamp(52px, 6.6dvh, 58px) !important;
+    gap: clamp(7px, 0.65vw, 9px) !important;
+    padding: clamp(6px, 0.65dvh, 8px) clamp(9px, 0.72vw, 11px) !important;
+    border-radius: 11px !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .live-clock-icon {
+    width: clamp(31px, 3.8dvh, 35px) !important;
+    height: clamp(31px, 3.8dvh, 35px) !important;
+    flex: 0 0 clamp(31px, 3.8dvh, 35px) !important;
+    border-radius: 9px !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .live-clock-icon svg {
+    width: clamp(17px, 2.25dvh, 20px) !important;
+    height: clamp(17px, 2.25dvh, 20px) !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .live-clock-content {
+    gap: 0 !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .live-clock-location {
+    font-size: clamp(8px, 0.58vw, 9.5px) !important;
+    letter-spacing: .055em !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .live-clock-status {
+    gap: 4px !important;
+    font-size: clamp(7.5px, 0.52vw, 8.5px) !important;
+    letter-spacing: .055em !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .live-clock-dot {
+    width: 5px !important;
+    height: 5px !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .live-clock-time-row {
+    gap: 4px !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .live-clock-time {
+    font-size: clamp(18px, 1.45vw, 21px) !important;
+    line-height: 1.02 !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .live-clock-period {
+    font-size: clamp(8px, 0.56vw, 9px) !important;
+  }
+
+  body.admin-dashboard-page:not(.admin-detail-page) .live-clock-date {
+    font-size: clamp(8.5px, 0.58vw, 9.5px) !important;
+    line-height: 1.08 !important;
+  }
+
+  /* Stronger number hierarchy across all four main dashboards. */
+
+  .smart-dashboard-body .smart-kpi-grid .kpi-card h2 {
+    font-size: clamp(30px, 2.05vw, 36px) !important;
+    line-height: .95 !important;
+  }
+
+  .hitl-dashboard-body .hitl-redesign-kpis .kpi h2 {
+    font-size: clamp(29px, 1.95vw, 35px) !important;
+    line-height: .95 !important;
+  }
+
+  .workforce-dashboard-body .workforce-redesign-kpis .kpi h2 {
+    font-size: clamp(29px, 2vw, 36px) !important;
+    line-height: .95 !important;
+  }
+
+  /* Smart Maintenance routing counts: make the case number the visual focus
+     while keeping the word "cases" as a secondary unit. */
+  .smart-dashboard-body .routing-status-panel strong {
+    font-size: clamp(31px, 2.25vw, 40px) !important;
+    line-height: .9 !important;
+    gap: clamp(5px, .38vw, 7px) !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel .case-unit {
+    font-size: .38em !important;
+    line-height: 1 !important;
+    transform: translateY(-1px);
+  }
+
+  .smart-dashboard-body .routing-status-panel h3 {
+    margin-bottom: clamp(4px, .42dvh, 6px) !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel p {
+    margin-top: clamp(4px, .42dvh, 6px) !important;
+  }
+
+  /* A little more breathing room for the larger routing counts without
+     turning the summary back into a tall dashboard block. */
+  .smart-dashboard-body .routing-status-panel {
+    min-height: clamp(62px, 7.8dvh, 76px) !important;
+  }
+}
+
+/* Short laptop screens: preserve the compact clock and readable counts. */
+@media (min-width: 1100px) and (min-height: 600px) and (max-height: 760px) {
+  body.admin-dashboard-page:not(.admin-detail-page) .live-clock {
+    width: clamp(192px, 14vw, 208px) !important;
+    min-width: clamp(192px, 14vw, 208px) !important;
+    min-height: 50px !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel {
+    min-height: 60px !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel strong {
+    font-size: clamp(29px, 2.1vw, 36px) !important;
+  }
+}
+
+/* =====================================================================
+   Compact AI Ticket Routing Summary without shrinking case counts
+   ---------------------------------------------------------------------
+   Keep the large case number as the visual focus, but collapse the second
+   and third information lines into one compact row. Because the dashboard
+   grid uses auto height for this summary, the recovered height flows
+   automatically to the trend and lower analysis charts.
+   ===================================================================== */
+@media (min-width: 1100px) and (min-height: 600px) {
+  .smart-dashboard-body .routing-summary-card {
+    padding: clamp(7px, 0.7dvh, 9px) clamp(11px, 0.85vw, 14px) !important;
+  }
+
+  .smart-dashboard-body .routing-summary-card .chart-header {
+    margin-bottom: clamp(3px, 0.35dvh, 5px) !important;
+  }
+
+  .smart-dashboard-body .routing-summary-card .chart-header h2 {
+    line-height: 1.02 !important;
+  }
+
+  .smart-dashboard-body .routing-summary-card .chart-header p {
+    margin-top: 1px !important;
+    line-height: 1.08 !important;
+  }
+
+  .smart-dashboard-body .routing-status-grid {
+    gap: clamp(7px, 0.6vw, 10px) !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel {
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    grid-template-rows: auto auto !important;
+    align-items: center !important;
+    column-gap: clamp(12px, 1vw, 18px) !important;
+    row-gap: 0 !important;
+    min-height: clamp(52px, 6.4dvh, 62px) !important;
+    padding: clamp(5px, 0.52dvh, 7px) clamp(12px, 0.9vw, 16px) !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel h3 {
+    grid-column: 1 / -1 !important;
+    grid-row: 1 !important;
+    margin: 0 0 clamp(1px, 0.12dvh, 2px) !important;
+    line-height: 1.02 !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel strong {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    margin: 0 !important;
+    font-size: clamp(31px, 2.25vw, 40px) !important;
+    line-height: .82 !important;
+    white-space: nowrap;
+  }
+
+  .smart-dashboard-body .routing-status-panel p {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    justify-self: end;
+    align-self: end;
+    margin: 0 0 1px !important;
+    font-size: clamp(9.5px, .68vw, 11px) !important;
+    line-height: 1.05 !important;
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 1100px) and (min-height: 600px) and (max-height: 760px) {
+  .smart-dashboard-body .routing-summary-card {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel {
+    min-height: 50px !important;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel strong {
+    font-size: clamp(30px, 2.15vw, 37px) !important;
+  }
+}
+
+/* =====================================================================
+   Restore compact 3-row routing card layout
+   ---------------------------------------------------------------------
+   User preference: keep the three information lines stacked vertically:
+   label -> large case count -> percentage. The spacing is compressed so
+   the summary stays compact and leaves more room for the charts below.
+   ===================================================================== */
+@media (min-width: 1100px) and (min-height: 600px) {
+  .smart-dashboard-body .routing-summary-card {
+    padding: clamp(7px, 0.65dvh, 9px) clamp(11px, 0.85vw, 14px) !important;
+  }
+
+  .smart-dashboard-body .routing-summary-card .chart-header {
+    margin-bottom: clamp(3px, 0.3dvh, 4px) !important;
+  }
+
+  .smart-dashboard-body .routing-status-grid {
+    gap: clamp(7px, 0.6vw, 10px) !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto auto !important;
+    align-content: center !important;
+    align-items: start !important;
+    row-gap: clamp(1px, 0.18dvh, 2px) !important;
+    min-height: clamp(66px, 7.7dvh, 78px) !important;
+    padding: clamp(5px, 0.5dvh, 7px) clamp(12px, 0.9vw, 16px) !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel h3 {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    margin: 0 !important;
+    line-height: 1.02 !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel strong {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    margin: 0 !important;
+    font-size: clamp(31px, 2.25vw, 40px) !important;
+    line-height: .9 !important;
+    white-space: nowrap;
+  }
+
+  .smart-dashboard-body .routing-status-panel p {
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+    justify-self: start !important;
+    align-self: start !important;
+    margin: 0 !important;
+    font-size: clamp(9.5px, .68vw, 11px) !important;
+    line-height: 1.02 !important;
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 1100px) and (min-height: 600px) and (max-height: 760px) {
+  .smart-dashboard-body .routing-status-panel {
+    min-height: 62px !important;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+    row-gap: 1px !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel strong {
+    font-size: clamp(30px, 2.15vw, 37px) !important;
+  }
+}
+
+/* =====================================================================
+   Balanced compact 3-row AI Ticket Routing Summary
+   ---------------------------------------------------------------------
+   Keep the user's preferred stacked order (label -> large count -> share),
+   but restore enough vertical breathing room so the two routing cards do not
+   look crushed. The summary remains compact so the trend and lower charts
+   keep most of the available viewport height.
+   ===================================================================== */
+@media (min-width: 1100px) and (min-height: 600px) {
+  .smart-dashboard-body .routing-summary-card {
+    padding: clamp(8px, 0.78dvh, 10px) clamp(12px, 0.9vw, 15px) !important;
+  }
+
+  .smart-dashboard-body .routing-summary-card .chart-header {
+    margin-bottom: clamp(5px, 0.5dvh, 7px) !important;
+  }
+
+  .smart-dashboard-body .routing-summary-card .chart-header h2 {
+    line-height: 1.08 !important;
+  }
+
+  .smart-dashboard-body .routing-summary-card .chart-header p {
+    margin-top: 2px !important;
+    line-height: 1.15 !important;
+  }
+
+  .smart-dashboard-body .routing-status-grid {
+    gap: clamp(9px, 0.72vw, 12px) !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    min-height: clamp(78px, 8.4dvh, 90px) !important;
+    padding: clamp(9px, 0.85dvh, 11px) clamp(14px, 1vw, 18px) !important;
+    gap: 0 !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel h3 {
+    margin: 0 0 clamp(4px, 0.38dvh, 5px) !important;
+    font-size: clamp(14px, 1vw, 16px) !important;
+    line-height: 1.1 !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel strong {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: clamp(5px, 0.38vw, 7px) !important;
+    margin: 0 !important;
+    font-size: clamp(33px, 2.35vw, 42px) !important;
+    line-height: .96 !important;
+    white-space: nowrap;
+  }
+
+  .smart-dashboard-body .routing-status-panel .case-unit {
+    font-size: .42em !important;
+    line-height: 1 !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel p {
+    margin: clamp(5px, 0.45dvh, 6px) 0 0 !important;
+    font-size: clamp(10px, .7vw, 11.5px) !important;
+    line-height: 1.15 !important;
+    white-space: nowrap;
+  }
+}
+
+/* Shorter laptops: stay balanced, but recover a little more chart space. */
+@media (min-width: 1100px) and (min-height: 600px) and (max-height: 760px) {
+  .smart-dashboard-body .routing-summary-card {
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
+  }
+
+  .smart-dashboard-body .routing-summary-card .chart-header {
+    margin-bottom: 4px !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel {
+    min-height: 72px !important;
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel strong {
+    font-size: clamp(32px, 2.2vw, 39px) !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel h3 {
+    margin-bottom: 3px !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel p {
+    margin-top: 4px !important;
+  }
+}
+
+/* =====================================================================
+   Balanced KPI number scale across all four main dashboards
+   ---------------------------------------------------------------------
+   Reduce oversized KPI values so headings, numbers, descriptions and
+   charts share a calmer visual hierarchy. Values remain prominent without
+   dominating their cards. Smart Maintenance routing counts are reduced too
+   so the summary stays visually balanced with the KPI row above it.
+   ===================================================================== */
+@media (min-width: 1100px) and (min-height: 600px) {
+
+  .smart-dashboard-body .smart-kpi-grid .kpi-card h2 {
+    font-size: clamp(24px, 1.68vw, 30px) !important;
+    line-height: 1 !important;
+  }
+
+  .hitl-dashboard-body .hitl-redesign-kpis .kpi h2 {
+    font-size: clamp(23px, 1.62vw, 29px) !important;
+    line-height: 1 !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-redesign-kpis .kpi h2 {
+    font-size: clamp(23px, 1.65vw, 30px) !important;
+    line-height: 1 !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel strong {
+    font-size: clamp(28px, 1.95vw, 34px) !important;
+    line-height: .98 !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel .case-unit {
+    font-size: .4em !important;
+  }
+}
+
+/* Short laptop screens: keep the same hierarchy without making values tiny. */
+@media (min-width: 1100px) and (min-height: 600px) and (max-height: 760px) {
+
+  .smart-dashboard-body .smart-kpi-grid .kpi-card h2 {
+    font-size: clamp(23px, 1.6vw, 28px) !important;
+  }
+
+  .hitl-dashboard-body .hitl-redesign-kpis .kpi h2,
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-redesign-kpis .kpi h2 {
+    font-size: clamp(22px, 1.55vw, 28px) !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel strong {
+    font-size: clamp(27px, 1.9vw, 33px) !important;
+  }
+}
+
+
+/* Shared severity pills — aligned with dashboard chart colours. */
+.severity-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 54px;
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+}
+.severity-critical {
+  background: #fee2e2;
+  border-color: #ef4444;
+  color: #b91c1c;
+}
+.severity-high {
+  background: #fee2e2;
+  border-color: #fecaca;
+  color: #dc2626;
+}
+.severity-medium {
+  background: #fef3c7;
+  border-color: #fde68a;
+  color: #b45309;
+}
+.severity-low {
+  background: #dbeafe;
+  border-color: #bfdbfe;
+  color: #2563eb;
+}
+.severity-normal {
+  background: #f3f4f6;
+  border-color: #e5e7eb;
+  color: #374151;
+}
+
+
+/* =====================================================================
+   override — keep trend charts fully inside their own cards
+   and make the plot area larger and clearer without overlapping the
+   row below.
+   ===================================================================== */
+@media (min-width: 1100px) {
+
+  .smart-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    grid-template-rows: auto auto auto minmax(280px, 0.88fr) minmax(300px, 1.12fr) !important;
+  }
+
+  .smart-dashboard-body .smart-trend-middle-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 12px 14px !important;
+    z-index: 1;
+  }
+
+  .smart-dashboard-body .smart-bottom-grid {
+    position: relative;
+    z-index: 2;
+    min-height: 0;
+  }
+
+  .smart-dashboard-body .smart-trend-middle-card .chart-header {
+    margin-bottom: 6px !important;
+    flex: 0 0 auto;
+  }
+
+  .smart-dashboard-body .smart-middle-chart-box {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .smart-dashboard-body .smart-middle-chart-box canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+  }
+}
+
+
+/* =====================================================================
+   trend chart sizing — larger plot, no compression, no overlap.
+   The dashboard can scroll slightly on shorter screens so the trend card
+   never steals space from, or overlaps, the cards below.
+   ===================================================================== */
+@media (min-width: 1100px) {
+  body.smart-dashboard-body:not(.admin-detail-page) {
+    height: auto !important;
+    min-height: 100dvh !important;
+    overflow-y: auto !important;
+  }
+
+  body.smart-dashboard-body:not(.admin-detail-page) .layout,
+body.smart-dashboard-body:not(.admin-detail-page) .dashboard {
+    height: auto !important;
+    min-height: 100dvh !important;
+    align-items: stretch;
+  }
+
+  body.smart-dashboard-body:not(.admin-detail-page) .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100dvh !important;
+    align-self: flex-start;
+  }
+
+  body.smart-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    height: auto !important;
+    min-height: 100dvh !important;
+    overflow: visible !important;
+  }
+
+  body.smart-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    grid-template-rows: auto auto auto 370px minmax(310px, auto) !important;
+  }
+
+  .smart-dashboard-body .smart-trend-middle-card {
+    height: 370px !important;
+    min-height: 370px !important;
+    max-height: 370px !important;
+    overflow: hidden !important;
+    padding: 13px 16px 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .trend-legend-blue {
+    color: #2563eb;
+    background: #2563eb;
+  }
+
+  .trend-legend-green {
+    color: #16a34a;
+    background: repeating-linear-gradient(
+      to right,
+      #16a34a 0 9px,
+      transparent 9px 14px
+    );
+  }
+
+  .trend-legend-green::after {
+    border-radius: 2px;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  .smart-dashboard-body .smart-middle-chart-box {
+    flex: 1 1 auto !important;
+    height: auto !important;
+    min-height: 285px !important;
+    max-height: none !important;
+    overflow: hidden !important;
+  }
+
+  .smart-dashboard-body .smart-middle-chart-box canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+  }
+
+  .smart-dashboard-body .smart-bottom-grid {
+    min-height: 310px !important;
+    height: auto !important;
+  }
+}
+
+
+/* =====================================================================
+   Executive Overview emphasis — make the trend chart the visual priority.
+   Operational Alert and lower cards become more compact so the trend row
+   gets significantly more room while staying inside its card.
+   ===================================================================== */
+
+/* =====================================================================
+   Executive Overview — balanced desktop layout
+   ---------------------------------------------------------------------
+   Uses normal document flow instead of forcing every card into one
+   viewport. The trend remains prominent, while alerts and lower cards
+   retain readable, normal proportions. Short screens scroll naturally.
+   ===================================================================== */
+@media (min-width: 1100px) {
+  body.overview-dashboard-body:not(.admin-detail-page) {
+    height: auto !important;
+    min-height: 100dvh !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+  }
+
+  body.overview-dashboard-body:not(.admin-detail-page) .layout,
+  body.overview-dashboard-body:not(.admin-detail-page) .dashboard {
+    height: auto !important;
+    min-height: 100dvh !important;
+    align-items: stretch !important;
+  }
+
+  body.overview-dashboard-body:not(.admin-detail-page) .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100dvh !important;
+    align-self: flex-start;
+  }
+
+  body.overview-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    height: auto !important;
+    min-height: 100dvh !important;
+    overflow: visible !important;
+    padding-bottom: 24px !important;
+  }
+
+  .overview-dashboard-body .topbar,
+  .overview-dashboard-body .overview-kpi-grid,
+  .overview-dashboard-body .overview-alerts-card,
+  .overview-dashboard-body .overview-trend-card,
+  .overview-dashboard-body .overview-bottom-grid {
+    flex: 0 0 auto !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* Compact but readable — no clipped text. */
+  .overview-dashboard-body .overview-alerts-card {
+    min-height: 132px !important;
+    height: auto !important;
+    max-height: none !important;
+    padding: 10px 12px !important;
+    overflow: visible !important;
+  }
+
+  .overview-dashboard-body .overview-alerts-card .table-header.compact-header {
+    margin-bottom: 7px !important;
+  }
+
+  .overview-dashboard-body .overview-alerts-card .table-header h2 {
+    font-size: 16px !important;
+    line-height: 1.1 !important;
+  }
+
+  .overview-dashboard-body .overview-alerts-card .table-header p {
+    margin-top: 2px !important;
+    font-size: 10.5px !important;
+    line-height: 1.2 !important;
+  }
+
+  .overview-dashboard-body .alert-grid.four-alerts {
+    gap: 9px !important;
+  }
+
+  .overview-dashboard-body .alert-box {
+    min-height: 84px !important;
+    height: auto !important;
+    padding: 8px 10px !important;
+  }
+
+  .overview-dashboard-body .alert-label {
+    font-size: 12.5px !important;
+    line-height: 1.1 !important;
+  }
+
+  .overview-dashboard-body .alert-box small {
+    margin-top: 2px !important;
+    max-height: none !important;
+    overflow: visible !important;
+    font-size: 9px !important;
+    line-height: 1.18 !important;
+  }
+
+  .overview-dashboard-body .alert-box strong {
+    margin-top: 5px !important;
+    font-size: 19px !important;
+    line-height: 1 !important;
+  }
+
+  .overview-dashboard-body .alert-link {
+    padding-top: 3px !important;
+    font-size: 9.5px !important;
+  }
+
+  /* Main visual — large plot plus a clear legend underneath. */
+  .overview-dashboard-body .overview-trend-card {
+    height: 430px !important;
+    min-height: 430px !important;
+    max-height: none !important;
+    padding: 12px 15px 10px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+  }
+
+  .overview-dashboard-body .trend-chart-header {
+    flex: 0 0 auto !important;
+    margin-bottom: 4px !important;
+  }
+
+  .overview-dashboard-body .trend-chart-header h2 {
+    font-size: 18px !important;
+    line-height: 1.1 !important;
+  }
+
+  .overview-dashboard-body .trend-chart-header p {
+    margin-top: 2px !important;
+    font-size: 11px !important;
+    line-height: 1.2 !important;
+  }
+
+  .overview-dashboard-body .overview-trend-box {
+    flex: 1 1 auto !important;
+    height: 335px !important;
+    min-height: 335px !important;
+    max-height: 335px !important;
+    overflow: hidden !important;
+  }
+
+  .overview-dashboard-body .overview-trend-box canvas {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .overview-dashboard-body .trend-bottom-legend {
+    flex: 0 0 34px !important;
+    min-height: 34px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 28px !important;
+    padding-top: 5px !important;
+    border-top: 1px solid rgba(148, 163, 184, 0.18);
+    color: #334155;
+    font-size: 11px !important;
+    font-weight: 700;
+  }
+
+  .overview-dashboard-body .trend-bottom-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+
+  .overview-dashboard-body .trend-legend-line {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 3px;
+    border-radius: 999px;
+    flex: 0 0 auto;
+  }
+
+  .overview-dashboard-body .trend-legend-line::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border: 2px solid currentColor;
+    background: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .overview-dashboard-body .trend-legend-blue {
+    color: #2563eb;
+    background: #2563eb;
+  }
+
+  .overview-dashboard-body .trend-legend-teal {
+    color: #14b8a6;
+    background: repeating-linear-gradient(
+      to right,
+      #14b8a6 0 7px,
+      transparent 7px 11px
+    );
+  }
+
+  /* Lower cards keep normal size; they are not sacrificed for the trend. */
+  .overview-dashboard-body .overview-bottom-grid {
+    min-height: 280px !important;
+    height: 280px !important;
+    max-height: none !important;
+    gap: 12px !important;
+    overflow: visible !important;
+  }
+
+  .overview-dashboard-body .compact-chart-card {
+    min-height: 280px !important;
+    height: 280px !important;
+    max-height: none !important;
+    padding: 12px 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+  }
+
+  .overview-dashboard-body .compact-chart-card .chart-header {
+    flex: 0 0 auto !important;
+    margin-bottom: 5px !important;
+  }
+
+  .overview-dashboard-body .compact-chart-card .chart-header h2 {
+    font-size: 16px !important;
+    line-height: 1.1 !important;
+  }
+
+  .overview-dashboard-body .compact-chart-card .chart-header p {
+    margin-top: 2px !important;
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+  }
+
+  .overview-dashboard-body .capacity-snapshot,
+  .overview-dashboard-body .overview-bottom-chart-box {
+    flex: 1 1 auto !important;
+    height: 215px !important;
+    min-height: 215px !important;
+    max-height: 215px !important;
+  }
+
+  .overview-dashboard-body .capacity-snapshot {
+    grid-template-columns: 45% 55% !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .overview-dashboard-body .capacity-gauge-wrap {
+    height: 205px !important;
+    min-height: 205px !important;
+    max-height: 205px !important;
+  }
+
+  .overview-dashboard-body .capacity-legend {
+    align-self: center !important;
+    gap: 8px !important;
+    padding: 0 6px 0 0 !important;
+  }
+
+  .overview-dashboard-body .capacity-row {
+    grid-template-columns: 10px 1fr auto !important;
+    gap: 7px !important;
+    padding-bottom: 7px !important;
+    font-size: 11px !important;
+    line-height: 1.1 !important;
+  }
+
+  .overview-dashboard-body .capacity-dot {
+    width: 9px !important;
+    height: 9px !important;
+  }
+
+  .overview-dashboard-body .capacity-total {
+    padding-top: 7px !important;
+    font-size: 11px !important;
+  }
+
+  .overview-dashboard-body .overview-bottom-chart-box {
+    overflow: hidden !important;
+  }
+}
+
+/* Workforce support-history final override */
+@media (min-width: 1100px) {
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-redesign-kpis.kpis.four {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .current-support-section {
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .support-action-grid-current {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+  }
+
+  .workforce-dashboard-body:not(.admin-detail-page) .support-history-card {
+    flex: 0 0 auto !important;
+    min-height: 46px !important;
+    margin-top: clamp(5px, .7dvh, 10px) !important;
+  }
+}

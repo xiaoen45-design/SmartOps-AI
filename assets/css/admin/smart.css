@@ -1,0 +1,1442 @@
+/*
+ * SmartOps Source: assets/css/admin/smart.css
+ * Purpose: Css / Admin: Smart visual styling and responsive layout rules.
+ *
+ * Developer Guide section map: Base/Layout, Navigation, Header, KPI Cards,
+ * Cards/Charts, Tables/Filters, Buttons/Forms, Modals, and Responsive Rules.
+ */
+
+/* SmartOps dashboard layout — module styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+
+/* ==========================================================================
+   SECTION: Base and Page Layout
+   ========================================================================== */
+:root {
+  --bg: #f4f6f9;
+  --card: #ffffff;
+  --primary: #111827;
+  --secondary: #6b7280;
+  --accent: #2563eb;
+  --accent-light: #eaf2ff;
+  --border: #e5e7eb;
+  --shadow: 0 3px 10px rgba(15, 23, 42, 0.06);
+  --red: #ef4444;
+  --dark-red: #dc2626;
+  --orange: #f59e0b;
+  --green: #16a34a;
+  --purple: #7c3aed;
+}
+
+html { zoom: 0.9; }
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--primary);
+  font-size: 14px;
+}
+
+button,
+input,
+select,
+textarea { font: inherit; }
+
+a { color: inherit; }
+
+.layout,
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+
+/* ==========================================================================
+   SECTION: Sidebar and Navigation
+   ========================================================================== */
+.sidebar {
+  width: 220px;
+  min-width: 220px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 18px;
+  border-right: 1px solid var(--border);
+  background: var(--card);
+}
+
+.brand,
+.logo {
+  margin: 0 0 38px;
+  padding-left: 4px;
+}
+
+.brand h2,
+.logo h2 {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.smart { color: var(--primary); }
+.stay { color: var(--accent); }
+
+.brand p,
+.logo p {
+  margin-top: 2px;
+  color: var(--secondary);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.nav,
+.sidebar nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.nav a,
+.sidebar nav a {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--card);
+  color: var(--primary);
+  box-shadow: var(--shadow);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.18;
+  text-decoration: none;
+}
+
+.nav a:hover,
+.nav a.active,
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+.main,
+.main-content,
+.main.dashboard-page {
+  flex: 1;
+  min-width: 0;
+  padding: 16px 20px 24px;
+}
+
+
+/* ==========================================================================
+   SECTION: Top Bar and Page Header
+   ========================================================================== */
+.topbar {
+  min-height: 58px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 12px;
+}
+
+.topbar h1 {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+}
+
+.topbar p {
+  margin-top: 4px;
+  color: var(--secondary);
+  font-size: 15px;
+}
+
+.profile-container,
+.sidebar-admin-profile {
+  position: relative;
+  margin-top: auto;
+}
+
+.profile-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--primary);
+  box-shadow: var(--shadow);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.profile-avatar {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.profile-dropdown {
+  width: 100%;
+  display: none;
+  position: absolute;
+  bottom: 52px;
+  left: 0;
+  z-index: 1000;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+}
+
+.profile-dropdown.is-open { display: block; }
+.profile-dropdown a {
+  display: block;
+  padding: 12px 15px;
+  font-size: 13px;
+  text-decoration: none;
+}
+.profile-dropdown a:hover { background: var(--accent-light); }
+
+.card,
+.chart-card,
+.action-card,
+.alert-box {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.card,
+.chart-card,
+.action-card { padding: 16px; }
+
+.chart-header,
+.chart-title-row,
+
+/* ==========================================================================
+   SECTION: Tables and Filters
+   ========================================================================== */
+.table-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.chart-header h2,
+.chart-title-row h2,
+.table-header h2 {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.chart-header p,
+.table-header p {
+  margin-top: 4px;
+  color: var(--secondary);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+
+/* ==========================================================================
+   SECTION: Cards and Charts
+   ========================================================================== */
+.chart-box {
+  height: 255px;
+  min-height: 255px;
+}
+
+.chart-box canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.empty-table-message {
+  padding: 28px !important;
+  color: var(--secondary) !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+}
+
+
+/* ==========================================================================
+   SECTION: KPI Cards and Summary Metrics
+   ========================================================================== */
+.kpi-container {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.kpi-card {
+  min-height: 92px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  cursor: default;
+}
+
+.kpi-card h3 {
+  margin-bottom: 7px;
+  color: var(--secondary);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.kpi-card h2 {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.kpi-card p {
+  margin-top: 7px;
+  color: var(--secondary);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.five-kpi { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.routing-summary-card,
+.smart-trend-middle-card { margin-bottom: 14px; }
+
+.routing-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.route-card {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+.route-card span {
+  display: block;
+  font-size: 13px;
+  font-weight: 800;
+}
+.route-card strong {
+  display: block;
+  margin: 7px 0;
+  font-size: 28px;
+  line-height: 1;
+}
+.route-card small {
+  color: var(--secondary);
+  line-height: 1.4;
+}
+.route-blue,
+.route-red,
+.route-orange,
+.route-green { border-left: 1px solid var(--border); }
+
+.smart-middle-chart-box { height: 285px; min-height: 285px; }
+.smart-one-column-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+.smart-one-column-grid .chart-card { min-height: 330px; }
+
+.table-box,
+.compact-table-box {
+  max-width: 100%;
+  overflow: auto;
+}
+.compact-table-box { max-height: 255px; }
+.dashboard-table,
+.compact-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.dashboard-table th,
+.dashboard-table td,
+.compact-table th,
+.compact-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.dashboard-table th,
+.compact-table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #f8fafc;
+  color: var(--secondary);
+  font-weight: 800;
+}
+
+
+/* ==========================================================================
+   SECTION: Responsive Rules
+   ========================================================================== */
+@media (max-width: 1280px) {
+  .five-kpi { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .routing-summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 900px) {
+  .five-kpi,
+  .routing-summary-grid { grid-template-columns: 1fr; }
+}
+
+
+@media (max-width: 1100px) {
+  .smart-analytics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .smart-analytics-side {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .smart-analytics-side {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  html { zoom: 1; }
+  .layout,
+  .dashboard { flex-direction: column; }
+  .sidebar {
+    width: 100%;
+    min-width: 0;
+    min-height: auto;
+  }
+  .nav,
+  .sidebar nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .profile-container { margin-top: 16px; }
+  .profile-dropdown { top: 52px; bottom: auto; }
+}
+
+@media (max-width: 560px) {
+  .main,
+  .main-content,
+  .main.dashboard-page { padding: 14px; }
+  .nav,
+  .sidebar nav { grid-template-columns: 1fr; }
+}
+
+/* Smart Maintenance Dashboard Core Layout */
+.smart-kpi-grid .kpi-card {
+  min-height: 68px;
+  padding: 9px 13px;
+}
+.smart-kpi-grid .kpi-card h3 {
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: var(--primary);
+}
+.smart-kpi-grid .kpi-card h2 { font-size: 24px; }
+.smart-kpi-grid .kpi-card p {
+  margin-top: 4px;
+  font-size: 10.5px;
+}
+
+.hitl-status-card { margin-bottom: 10px; padding: 12px 14px; }
+.hitl-status-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.hitl-status-panel {
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+.hitl-required-panel {
+  border-color: #fecaca;
+  background: linear-gradient(90deg, #fff1f2, #fff7f7);
+}
+.no-hitl-panel {
+  border-color: #bbf7d0;
+  background: linear-gradient(90deg, #ecfdf5, #f0fdf4);
+}
+.hitl-status-icon {
+  width: 50px;
+  height: 50px;
+  flex: 0 0 50px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 800;
+}
+.hitl-required-panel .hitl-status-icon { background: var(--red); }
+.no-hitl-panel .hitl-status-icon { background: var(--green); }
+.hitl-status-panel strong {
+  display: block;
+  font-size: 27px;
+  line-height: 1;
+}
+.hitl-required-panel strong { color: var(--red); }
+.no-hitl-panel strong { color: var(--green); }
+.hitl-status-panel h3 {
+  margin-top: 4px;
+  font-size: 16px;
+}
+.hitl-status-panel p {
+  margin-top: 2px;
+  color: var(--secondary);
+  font-size: 11px;
+}
+
+.smart-bottom-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.smart-bottom-grid .chart-card { min-height: 310px; padding: 12px 14px; }
+.smart-lower-chart-box { height: 238px; min-height: 238px; }
+
+.smart-analytics-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(320px, 0.95fr);
+  gap: 12px;
+  min-height: 0;
+}
+
+.smart-analytics-main,
+.smart-analytics-side,
+.smart-side-chart-card {
+  min-height: 0;
+}
+
+.smart-analytics-main {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 14px;
+}
+
+.smart-analytics-side {
+  display: grid;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  min-height: 0;
+}
+
+.smart-side-chart-card {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 14px;
+}
+
+.smart-analytics-grid .chart-header { margin-bottom: 6px; }
+.smart-analytics-grid .chart-header h2 { font-size: 16px; }
+.smart-analytics-grid .chart-header p { font-size: 11px; margin-top: 2px; }
+.smart-analytics-main .smart-middle-chart-box { flex: 1; height: auto; min-height: 0; }
+.smart-side-chart-card .smart-lower-chart-box { flex: 1; height: auto; min-height: 0; }
+
+.detail-page { display: grid; gap: 14px; }
+.detail-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 15px 17px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+.detail-toolbar h2 { font-size: 20px; }
+.detail-toolbar p { margin-top: 4px; color: var(--secondary); font-size: 13px; }
+.three-kpi { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.four-kpi { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.detail-kpi-grid { margin-bottom: 0; }
+.secondary-btn,
+.review-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 9px 15px;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+.review-btn { background: var(--accent); color: #fff; }
+.secondary-btn:hover { background: var(--accent-light); }
+.review-btn:hover { background: #1d4ed8; }
+.table-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+/* ==========================================================================
+   SECTION: Buttons and Forms
+   ========================================================================== */
+.table-controls input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+}
+.table-controls input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,.12); }
+.detail-table-box { max-height: 520px; }
+.detail-table th,
+.detail-table td { padding: 11px 12px; }
+.severity-badge,
+.status-badge {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+}
+.severity-critical { background: #fee2e2; border: 1px solid #ef4444; color: #b91c1c; }
+.severity-high { background: #fee2e2; border: 1px solid #fecaca; color: #dc2626; }
+.severity-medium { background: #fef3c7; border: 1px solid #fde68a; color: #b45309; }
+.severity-low { background: #dbeafe; border: 1px solid #bfdbfe; color: #2563eb; }
+.status-pending { background: #f3f4f6; color: #374151; }
+.status-assigned,
+.status-progress { background: #e0f2fe; color: #0369a1; }
+.status-completed { background: #dcfce7; color: #15803d; }
+
+
+/* ==========================================================================
+   SECTION: Modals and Overlays
+   ========================================================================== */
+.case-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  padding: 30px;
+  background: rgba(15, 23, 42, .48);
+  overflow: auto;
+}
+.case-modal.is-open { display: grid; place-items: center; }
+.case-modal-dialog {
+  width: min(920px, 96vw);
+  max-height: 90vh;
+  overflow: auto;
+  position: relative;
+  padding: 24px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, .28);
+}
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: #f3f4f6;
+  font-size: 24px;
+  cursor: pointer;
+}
+.case-modal-dialog h2 { padding-right: 48px; margin-bottom: 18px; }
+.case-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.case-detail-item {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #f8fafc;
+}
+.case-detail-item.full { grid-column: 1 / -1; }
+.case-detail-item span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--secondary);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.case-detail-item strong { font-size: 13px; line-height: 1.45; }
+
+@media (max-width: 1100px) {
+  .smart-bottom-grid,
+  .hitl-status-grid { grid-template-columns: 1fr; }
+  .four-kpi { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .three-kpi,
+  .four-kpi { grid-template-columns: 1fr; }
+  .detail-toolbar { align-items: flex-start; flex-direction: column; }
+  .case-detail-grid { grid-template-columns: 1fr; }
+  .case-detail-item.full { grid-column: auto; }
+}
+
+/* Shared Executive Dashboard Theme */
+.admin-dashboard-page {
+  background: #f4f6f9;
+  color: #111827;
+}
+
+.admin-dashboard-page .sidebar {
+  background: #ffffff;
+  border-right: 1px solid #e5e7eb;
+}
+
+.admin-dashboard-page .topbar h1 {
+  color: #111827;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+.admin-dashboard-page .topbar p {
+  color: #6b7280;
+}
+
+.admin-dashboard-page .kpi-card,
+.admin-dashboard-page .chart-card,
+.admin-dashboard-page .detail-toolbar,
+.admin-dashboard-page .case-modal-dialog {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.06);
+}
+
+.admin-dashboard-page .kpi-card {
+}
+
+.admin-dashboard-page .chart-header h2,
+.admin-dashboard-page .table-header h2,
+.admin-dashboard-page .detail-toolbar h2 {
+  color: #111827;
+  font-weight: 800;
+}
+
+.admin-dashboard-page .chart-header p,
+.admin-dashboard-page .table-header p,
+.admin-dashboard-page .detail-toolbar p {
+  color: #6b7280;
+}
+
+.admin-dashboard-page .dashboard-table th,
+.admin-dashboard-page .compact-table th {
+  background: #f8fafc;
+  color: #6b7280;
+}
+
+.admin-dashboard-page .dashboard-table td,
+.admin-dashboard-page .compact-table td {
+  color: #111827;
+}
+
+.admin-dashboard-page .secondary-btn,
+.admin-dashboard-page .review-btn {
+  border-radius: 10px;
+  font-weight: 800;
+}
+
+.admin-dashboard-page .review-btn {
+  border-color: #2563eb;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.admin-dashboard-page .review-btn:hover {
+  background: #1d4ed8;
+}
+
+.admin-dashboard-page .secondary-btn {
+  border-color: #2563eb;
+  background: #ffffff;
+  color: #2563eb;
+}
+
+.admin-dashboard-page .secondary-btn:hover {
+  background: #eaf2ff;
+}
+
+
+/* Smart Maintenance One-Screen Dashboard */
+.admin-dashboard-page .main.dashboard-page {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+.admin-dashboard-page .topbar {
+  min-height: 46px;
+  margin-bottom: 8px;
+}
+.admin-dashboard-page .topbar h1 { font-size: 25px; }
+.admin-dashboard-page .topbar p { font-size: 13px; margin-top: 2px; }
+.smart-kpi-grid { gap: 10px; margin-bottom: 10px; }
+.smart-kpi-grid .kpi-card {
+  border-left: 1px solid var(--border) !important;
+  box-shadow: var(--shadow);
+}
+.hitl-status-card .chart-header { margin-bottom: 7px; }
+.hitl-status-card .chart-header h2 { font-size: 17px; }
+.hitl-status-card .chart-header p { font-size: 11px; margin-top: 2px; }
+.smart-trend-middle-card {
+  margin-bottom: 10px;
+  padding: 12px 14px;
+}
+.smart-trend-middle-card .chart-header { margin-bottom: 4px; }
+.smart-trend-middle-card .chart-header h2,
+.smart-bottom-grid .chart-header h2 { font-size: 16px; }
+.smart-trend-middle-card .chart-header p,
+.smart-bottom-grid .chart-header p { font-size: 11px; margin-top: 2px; }
+.smart-bottom-grid { gap: 10px; }
+.smart-bottom-grid .chart-header { margin-bottom: 3px; }
+/* Remove coloured left edges from all Smart Maintenance cards. */
+.admin-dashboard-page .kpi-card,
+.admin-dashboard-page .route-card,
+.admin-dashboard-page .alert-box,
+.admin-dashboard-page .action-card {
+  border-left: 1px solid var(--border) !important;
+}
+@media (min-width: 1281px) and (min-height: 760px) {
+  .admin-dashboard-page { overflow: hidden; }
+}
+
+
+/* Smart Maintenance drill-through pages: sidebar contains only Back to Dashboard. */
+.admin-dashboard-page .sidebar .detail-back-link {
+  display: block;
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  color: var(--accent);
+  background: var(--card);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.admin-dashboard-page .sidebar .detail-back-link:hover {
+  background: var(--accent-light);
+}
+
+
+/* Desktop One-Screen Dashboard Layout */
+@media (min-width: 1281px) and (min-height: 760px) {
+  html, body { height: 100%; }
+  body { overflow: hidden; }
+  .layout, .dashboard, .sidebar { height: 100vh; min-height: 0; }
+  .main.dashboard-page {
+    height: 100vh;
+    min-height: 0;
+    overflow: hidden;
+    padding: 12px 20px;
+  }
+  .topbar { min-height: 46px; margin-bottom: 8px; }
+  .topbar h1 { font-size: 25px; line-height: 1.08; }
+  .topbar p { margin-top: 2px; font-size: 13px; }
+}
+
+@media (min-width: 1281px) and (min-height: 760px) {
+  .smart-dashboard-body .main.dashboard-page {
+    display: grid;
+    grid-template-rows: auto auto auto minmax(0, 1fr);
+    gap: 10px;
+  }
+  .smart-dashboard-body .topbar,
+  .smart-dashboard-body .smart-kpi-grid,
+  .smart-dashboard-body .hitl-status-card,
+  .smart-dashboard-body .smart-analytics-grid { margin-bottom: 0; }
+  .smart-dashboard-body .hitl-status-card,
+  .smart-dashboard-body .smart-analytics-grid,
+  .smart-dashboard-body .smart-analytics-main,
+  .smart-dashboard-body .smart-analytics-side,
+  .smart-dashboard-body .smart-side-chart-card { min-height: 0; height: 100%; }
+  .smart-dashboard-body .smart-middle-chart-box,
+  .smart-dashboard-body .smart-lower-chart-box { height: auto; min-height: 0; flex: 1; }
+}
+
+
+/* ===== Viewport fill correction for browser zoom =====
+   The dashboards keep the existing 90% visual scale while extending the
+   layout to the real viewport edge, so charts and the sidebar do not stop
+   above the bottom of the screen. */
+@media (min-width: 1281px) and (min-height: 760px) {
+  html, body {
+    width: 100%;
+    min-height: calc(100vh / 0.90);
+  }
+
+  body,
+  .layout,
+  .dashboard,
+  .sidebar,
+  .main.dashboard-page {
+    height: calc(100vh / 0.90);
+    min-height: calc(100vh / 0.90);
+  }
+
+  .sidebar {
+    align-self: stretch;
+    background: var(--card);
+  }
+}
+
+@media (max-width: 1280px) {
+  body,
+  .layout,
+  .dashboard,
+  .sidebar,
+  .main.dashboard-page {
+    min-height: calc(100vh / 0.82);
+  }
+}
+
+/* Detail Tables - Full Row Display */
+body.admin-detail-page {
+  overflow-y: auto !important;
+}
+body.admin-detail-page .layout,
+body.admin-detail-page .dashboard,
+body.admin-detail-page .sidebar,
+body.admin-detail-page .main.dashboard-page {
+  height: auto !important;
+  min-height: 100vh !important;
+}
+body.admin-detail-page .table-box,
+body.admin-detail-page .compact-table-box,
+body.admin-detail-page .detail-table-box {
+  max-height: none !important;
+  height: auto !important;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+}
+body.admin-detail-page .dashboard-table th,
+body.admin-detail-page .compact-table th {
+  position: static;
+}
+
+/* Admin dropdown: Technician Management belongs inside the Admin button. */
+.profile-btn.active {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent);
+}
+.profile-dropdown a.active,
+.profile-dropdown .profile-management-link:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+
+/* Daily Complaint Resolution Modal */
+body.modal-open { overflow: hidden !important; }
+.smart-trend-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 4000;
+  display: none;
+  place-items: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.52);
+  backdrop-filter: blur(3px);
+}
+.smart-trend-modal.is-open { display: grid; }
+.smart-trend-modal-card {
+  width: min(610px, 94vw);
+  position: relative;
+  padding: 26px;
+  border: 1px solid rgba(255,255,255,.7);
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 28px 80px rgba(15,23,42,.28);
+}
+.smart-trend-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: var(--primary);
+  font-size: 24px;
+  cursor: pointer;
+}
+.smart-trend-modal-eyebrow {
+  display: inline-block;
+  margin-bottom: 7px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.smart-trend-modal-card h2 { padding-right: 40px; font-size: 24px; }
+.smart-trend-modal-date { margin-top: 5px; color: var(--secondary); font-weight: 700; }
+.smart-trend-modal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+.smart-trend-modal-grid div {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #f8fafc;
+}
+.smart-trend-modal-grid span { display: block; color: var(--secondary); font-size: 12px; font-weight: 700; }
+.smart-trend-modal-grid strong { display: block; margin-top: 5px; font-size: 25px; }
+.smart-trend-modal-note {
+  margin-top: 14px;
+  padding: 13px 15px;
+  border-radius: 12px;
+  background: var(--accent-light);
+  color: #1e3a8a;
+  line-height: 1.45;
+  font-weight: 700;
+}
+.smart-trend-modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px; }
+.smart-trend-modal-actions button,
+.smart-trend-modal-actions a {
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+.smart-trend-modal-actions button { border: 1px solid var(--border); background: #fff; color: var(--primary); }
+.smart-trend-modal-actions a { border: 1px solid var(--accent); background: var(--accent); color: #fff; }
+@media (max-width: 620px) {
+  .smart-trend-modal-grid { grid-template-columns: 1fr; }
+}
+
+
+/* Smart Maintenance Routing Summary */
+.smart-dashboard-body .routing-summary-card .chart-header {
+  margin-bottom: 8px;
+}
+
+.smart-dashboard-body .routing-status-grid {
+  align-items: stretch;
+}
+
+.smart-dashboard-body .routing-status-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  overflow: visible;
+}
+
+.smart-dashboard-body .routing-status-panel h3 {
+  order: 1;
+  margin: 0 0 5px;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.smart-dashboard-body .routing-status-panel strong {
+  order: 2;
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.smart-dashboard-body .routing-status-panel .case-unit {
+  font-size: .52em;
+  font-weight: 800;
+}
+
+.smart-dashboard-body .routing-status-panel p {
+  order: 3;
+  margin: 5px 0 0;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+/* Match the Executive Overview Pending HITL attention effect. */
+@keyframes smartHitlRoutingPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, .22), 0 3px 10px rgba(15, 23, 42, .06);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(239, 68, 68, 0), 0 8px 20px rgba(239, 68, 68, .14);
+  }
+}
+
+.smart-dashboard-body .hitl-required-panel {
+  border: 2px solid #ef4444;
+  background: #fff5f5;
+  animation: smartHitlRoutingPulse 1.8s ease-in-out infinite;
+}
+
+.smart-dashboard-body .hitl-required-panel h3,
+.smart-dashboard-body .hitl-required-panel strong,
+.smart-dashboard-body .hitl-required-panel .case-unit {
+  color: #dc2626;
+}
+
+.smart-dashboard-body .hitl-required-panel:hover,
+.smart-dashboard-body .hitl-required-panel:focus-within {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .smart-dashboard-body .hitl-required-panel { animation: none; }
+}
+
+/* Let the Daily Complaint Resolution plot use more of its canvas height. */
+.smart-dashboard-body .smart-trend-middle-card .chart-header {
+  flex: 0 0 auto;
+}
+
+.smart-dashboard-body .smart-middle-chart-box {
+  min-height: 0;
+  overflow: hidden;
+}
+
+
+/* Smart Maintenance Analytics One-Page Fit */
+.smart-dashboard-body .smart-analytics-grid {
+  align-items: stretch;
+}
+
+.smart-dashboard-body .smart-analytics-main {
+  min-width: 0;
+}
+
+.smart-dashboard-body .smart-analytics-side {
+  min-width: 0;
+}
+
+.smart-dashboard-body .smart-middle-chart-box {
+  height: 100%;
+  min-height: 0;
+}
+
+.smart-dashboard-body .smart-side-chart-card .smart-lower-chart-box {
+  min-height: 0;
+}
+
+.smart-dashboard-body .smart-side-chart-card .chart-header {
+  margin-bottom: 4px;
+}
+
+@media (min-width: 1281px) and (min-height: 760px) {
+  .smart-dashboard-body .smart-analytics-grid {
+    grid-template-columns: minmax(0, 1.62fr) minmax(340px, 1fr);
+    gap: 10px;
+  }
+
+  .smart-dashboard-body .smart-analytics-side {
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .smart-dashboard-body .smart-analytics-main,
+  .smart-dashboard-body .smart-side-chart-card {
+    padding: 12px 14px;
+  }
+
+  .smart-dashboard-body .smart-middle-chart-box {
+    flex: 1;
+  }
+
+  .smart-dashboard-body .smart-lower-chart-box {
+    flex: 1;
+  }
+}
+
+
+/* Smart Maintenance Full-Screen Fit */
+.smart-dashboard-body .main.dashboard-page {
+  overflow: hidden;
+}
+
+.smart-dashboard-body .smart-kpi-grid .kpi-card {
+  min-height: 96px;
+}
+
+.smart-dashboard-body .hitl-status-card {
+  padding: 12px 16px;
+}
+
+.smart-dashboard-body .smart-analytics-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.62fr) minmax(360px, 1fr);
+  gap: 14px;
+  align-items: stretch;
+  min-height: 500px;
+}
+
+.smart-dashboard-body .smart-analytics-main {
+  padding: 12px 16px;
+}
+
+.smart-dashboard-body .smart-analytics-side {
+  display: grid;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.smart-dashboard-body .smart-side-chart-card {
+  padding: 12px 16px;
+  min-height: 0;
+}
+
+.smart-dashboard-body .smart-middle-chart-box {
+  min-height: 390px;
+}
+
+.smart-dashboard-body .smart-lower-chart-box {
+  min-height: 170px;
+}
+
+.smart-dashboard-body .smart-analytics-grid .chart-header {
+  margin-bottom: 8px;
+}
+
+.smart-dashboard-body .smart-analytics-grid .chart-header h2 {
+  font-size: 18px;
+}
+
+.smart-dashboard-body .smart-analytics-grid .chart-header p {
+  font-size: 12px;
+}
+
+@media (min-width: 1281px) and (min-height: 760px) {
+  .smart-dashboard-body .main.dashboard-page {
+    display: grid;
+    grid-template-rows: auto auto auto minmax(0, 1fr);
+    gap: 12px;
+    padding: 14px 20px 16px;
+  }
+
+  .smart-dashboard-body .topbar {
+    margin-bottom: 0;
+  }
+
+  .smart-dashboard-body .smart-kpi-grid,
+  .smart-dashboard-body .hitl-status-card,
+  .smart-dashboard-body .smart-analytics-grid {
+    margin-bottom: 0;
+  }
+
+  .smart-dashboard-body .smart-analytics-grid {
+    min-height: 0;
+    height: 100%;
+  }
+
+  .smart-dashboard-body .smart-middle-chart-box {
+    min-height: 0;
+    height: 100%;
+  }
+
+  .smart-dashboard-body .smart-lower-chart-box {
+    min-height: 0;
+    height: 100%;
+  }
+}
+
+@media (max-width: 1100px) {
+  .smart-dashboard-body .smart-analytics-grid {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .smart-dashboard-body .smart-analytics-side {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: none;
+  }
+
+  .smart-dashboard-body .smart-middle-chart-box {
+    min-height: 320px;
+  }
+
+  .smart-dashboard-body .smart-lower-chart-box {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 760px) {
+  .smart-dashboard-body .smart-analytics-side {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Smart Maintenance Summary Modal */
+.smart-trend-modal-card {
+  width: min(700px, 95vw);
+}
+
+.smart-trend-modal-grid {
+  display: block;
+  margin-top: 18px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.smart-trend-modal-grid > div {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(170px, 210px) minmax(0, 1fr);
+  align-items: start;
+  gap: 18px;
+  padding: 12px 2px;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  background: transparent;
+}
+
+.smart-trend-modal-grid > div:last-child {
+  border-bottom: 0;
+}
+
+.smart-trend-modal-grid span {
+  margin: 0;
+  color: var(--secondary);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.smart-trend-modal-grid strong {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 620px) {
+  .smart-trend-modal-grid > div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 10px 0;
+  }
+}
+
+/* Smart Maintenance Case Details - Horizontal Rows
+   Used by every Smart Maintenance case-detail modal and the full case page. */
+.admin-dashboard-page .case-detail-grid {
+  display: block !important;
+  width: 100%;
+  margin: 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-dashboard-page .case-detail-item,
+.admin-dashboard-page .case-detail-item.full {
+  width: 100%;
+  min-height: 42px;
+  display: grid !important;
+  grid-template-columns: 190px minmax(0, 1fr);
+  align-items: start;
+  column-gap: 22px;
+  padding: 11px 2px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--border) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.admin-dashboard-page .case-detail-item:last-child {
+  border-bottom: 0 !important;
+}
+
+.admin-dashboard-page .case-detail-item span {
+  display: block;
+  margin: 0 !important;
+  color: var(--secondary);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.admin-dashboard-page .case-detail-item strong {
+  min-width: 0;
+  margin: 0;
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+/* The row layout needs less vertical space than the old tile grid. */
+.admin-dashboard-page .case-modal-dialog {
+  width: min(920px, 96vw);
+  max-height: 90vh;
+  padding: 24px 26px;
+}
+
+@media (max-width: 700px) {
+  .admin-dashboard-page .case-detail-item,
+  .admin-dashboard-page .case-detail-item.full {
+    grid-template-columns: 1fr;
+    row-gap: 4px;
+    padding: 10px 0 !important;
+  }
+}

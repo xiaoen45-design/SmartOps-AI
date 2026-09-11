@@ -1,0 +1,1506 @@
+/*
+ * SmartOps Source: assets/css/admin/workforce.css
+ * Purpose: Css / Admin: Workforce visual styling and responsive layout rules.
+ *
+ * Developer Guide section map: Base/Layout, Navigation, Header, KPI Cards,
+ * Cards/Charts, Tables/Filters, Buttons/Forms, Modals, and Responsive Rules.
+ */
+
+/* SmartOps dashboard layout — module styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+
+/* ==========================================================================
+   SECTION: Base and Page Layout
+   ========================================================================== */
+:root {
+  --bg: #f4f6f9;
+  --card: #ffffff;
+  --primary: #111827;
+  --secondary: #6b7280;
+  --accent: #2563eb;
+  --accent-light: #eaf2ff;
+  --border: #e5e7eb;
+  --shadow: 0 3px 10px rgba(15, 23, 42, 0.06);
+  --red: #ef4444;
+  --dark-red: #dc2626;
+  --orange: #f59e0b;
+  --green: #16a34a;
+  --purple: #7c3aed;
+}
+
+html { zoom: 0.9; }
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--primary);
+  font-size: 14px;
+}
+
+button,
+input,
+select,
+textarea { font: inherit; }
+
+a { color: inherit; }
+
+.layout,
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+
+/* ==========================================================================
+   SECTION: Sidebar and Navigation
+   ========================================================================== */
+.sidebar {
+  width: 220px;
+  min-width: 220px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 18px;
+  border-right: 1px solid var(--border);
+  background: var(--card);
+}
+
+.brand,
+.logo {
+  margin: 0 0 38px;
+  padding-left: 4px;
+}
+
+.brand h2,
+.logo h2 {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.smart { color: var(--primary); }
+.stay { color: var(--accent); }
+
+.brand p,
+.logo p {
+  margin-top: 2px;
+  color: var(--secondary);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.nav,
+.sidebar nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.nav a,
+.sidebar nav a {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--card);
+  color: var(--primary);
+  box-shadow: var(--shadow);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.18;
+  text-decoration: none;
+}
+
+.nav a:hover,
+.nav a.active,
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+.main,
+.main-content,
+.main.dashboard-page {
+  flex: 1;
+  min-width: 0;
+  padding: 16px 20px 24px;
+}
+
+
+/* ==========================================================================
+   SECTION: Top Bar and Page Header
+   ========================================================================== */
+.topbar {
+  min-height: 58px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 12px;
+}
+
+.topbar h1 {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+}
+
+.topbar p {
+  margin-top: 4px;
+  color: var(--secondary);
+  font-size: 15px;
+}
+
+.profile-container,
+.sidebar-admin-profile {
+  position: relative;
+  margin-top: auto;
+}
+
+.profile-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--primary);
+  box-shadow: var(--shadow);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.profile-avatar {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.profile-dropdown {
+  width: 100%;
+  display: none;
+  position: absolute;
+  bottom: 52px;
+  left: 0;
+  z-index: 1000;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+}
+
+.profile-dropdown.is-open { display: block; }
+.profile-dropdown a {
+  display: block;
+  padding: 12px 15px;
+  font-size: 13px;
+  text-decoration: none;
+}
+.profile-dropdown a:hover { background: var(--accent-light); }
+
+.card,
+.chart-card,
+.action-card,
+.alert-box {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.card,
+.chart-card,
+.action-card { padding: 16px; }
+
+.chart-header,
+.chart-title-row,
+
+/* ==========================================================================
+   SECTION: Tables and Filters
+   ========================================================================== */
+.table-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.chart-header h2,
+.chart-title-row h2,
+.table-header h2 {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.chart-header p,
+.table-header p {
+  margin-top: 4px;
+  color: var(--secondary);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+
+/* ==========================================================================
+   SECTION: Cards and Charts
+   ========================================================================== */
+.chart-box {
+  height: 255px;
+  min-height: 255px;
+}
+
+.chart-box canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.empty-table-message {
+  padding: 28px !important;
+  color: var(--secondary) !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+}
+
+
+/* ==========================================================================
+   SECTION: KPI Cards and Summary Metrics
+   ========================================================================== */
+.kpis {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.kpi {
+  min-height: 92px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--accent);
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  cursor: default;
+}
+
+.kpi h3 {
+  margin-bottom: 7px;
+  color: var(--secondary);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.kpi h2 {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.kpis.five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.workforce-two-col-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+
+/* ==========================================================================
+   SECTION: Responsive Rules
+   ========================================================================== */
+@media (max-width: 1280px) {
+  .kpis.five { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 900px) {
+  .kpis.five,
+  .workforce-two-col-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 900px) {
+  html { zoom: 1; }
+  .layout,
+  .dashboard { flex-direction: column; }
+  .sidebar {
+    width: 100%;
+    min-width: 0;
+    min-height: auto;
+  }
+  .nav,
+  .sidebar nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .profile-container { margin-top: 16px; }
+  .profile-dropdown { top: 52px; bottom: auto; }
+}
+
+@media (max-width: 560px) {
+  .main,
+  .main-content,
+  .main.dashboard-page { padding: 14px; }
+  .nav,
+  .sidebar nav { grid-template-columns: 1fr; }
+}
+
+/* Workforce Dashboard Core Layout */
+.workforce-dashboard-page .kpi,
+.workforce-dashboard-body .kpi {
+  min-height: 88px;
+  border-left: 1px solid var(--border);
+  cursor: default;
+}
+
+.workforce-dashboard-page .kpi p {
+  margin-top: 8px;
+  color: var(--secondary);
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.clean-title > div { min-width: 0; }
+.clean-title p {
+  margin-top: 4px;
+  color: var(--secondary);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.action-section { min-height: 287px; }
+.support-action-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.support-action-card {
+  min-height: 188px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+
+.support-action-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 22px rgba(37, 99, 235, .12);
+}
+
+.support-action-label {
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.support-action-card strong {
+  margin-top: 10px;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.support-action-card p {
+  margin-top: 10px;
+  color: var(--secondary);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.support-action-link {
+  margin-top: auto;
+  padding-top: 12px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.sla-department-card .chart-box { height: 230px; min-height: 230px; }
+
+.kpis.one-row.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.text-value {
+  font-size: 20px !important;
+  line-height: 1.15 !important;
+}
+
+.detail-table-card { margin-top: 14px; }
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+th,
+td {
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: middle;
+  font-size: 13px;
+}
+
+th {
+  background: #f8fafc;
+  color: var(--secondary);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+small { color: var(--secondary); }
+
+.primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 9px 14px;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.primary-btn:hover { background: #1d4ed8; }
+
+.detail-back-link {
+  justify-content: center;
+  color: var(--accent) !important;
+}
+
+@media (max-width: 1200px) {
+  .support-action-grid { grid-template-columns: 1fr; }
+  .action-section { min-height: auto; }
+  .support-action-card { min-height: 135px; }
+}
+
+@media (max-width: 900px) {
+  .kpis.one-row.three { grid-template-columns: 1fr; }
+}
+
+
+/* Desktop One-Screen Dashboard Layout */
+@media (min-width: 1281px) and (min-height: 760px) {
+  html, body { height: 100%; }
+  body { overflow: hidden; }
+  .layout, .dashboard, .sidebar { height: 100vh; min-height: 0; }
+  .main.dashboard-page {
+    height: 100vh;
+    min-height: 0;
+    overflow: hidden;
+    padding: 12px 20px;
+  }
+  .topbar { min-height: 46px; margin-bottom: 8px; }
+  .topbar h1 { font-size: 25px; line-height: 1.08; }
+  .topbar p { margin-top: 2px; font-size: 13px; }
+}
+
+@media (min-width: 1281px) and (min-height: 760px) {
+  .workforce-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    display: grid;
+    grid-template-rows: auto auto minmax(0, 1fr);
+    gap: 10px;
+  }
+  .workforce-dashboard-body:not(.admin-detail-page) .topbar,
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-redesign-kpis { margin-bottom: 0; }
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-two-col-grid {
+    min-height: 0;
+    height: 100%;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-two-col-grid > .card {
+    min-height: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .workforce-dashboard-body:not(.admin-detail-page) .workforce-two-col-grid .chart-box,
+  .workforce-dashboard-body:not(.admin-detail-page) .sla-department-card .chart-box { height: auto; min-height: 0; flex: 1; }
+  .workforce-dashboard-body:not(.admin-detail-page) .action-section { min-height: 0; }
+  .workforce-dashboard-body:not(.admin-detail-page) .support-action-grid { min-height: 0; flex: 1; }
+  .workforce-dashboard-body:not(.admin-detail-page) .support-action-card { min-height: 0; }
+}
+
+
+/* ===== Viewport fill correction for browser zoom =====
+   The dashboards keep the existing 90% visual scale while extending the
+   layout to the real viewport edge, so charts and the sidebar do not stop
+   above the bottom of the screen. */
+@media (min-width: 1281px) and (min-height: 760px) {
+  html, body {
+    width: 100%;
+    min-height: calc(100vh / 0.90);
+  }
+
+  body,
+  .layout,
+  .dashboard,
+  .sidebar,
+  .main.dashboard-page {
+    height: calc(100vh / 0.90);
+    min-height: calc(100vh / 0.90);
+  }
+
+  .sidebar {
+    align-self: stretch;
+    background: var(--card);
+  }
+}
+
+@media (max-width: 1280px) {
+  body,
+  .layout,
+  .dashboard,
+  .sidebar,
+  .main.dashboard-page {
+    min-height: calc(100vh / 0.82);
+  }
+}
+
+/* Detail Tables - Full Row Display */
+body.admin-detail-page {
+  overflow-y: auto !important;
+}
+body.admin-detail-page .layout,
+body.admin-detail-page .dashboard,
+body.admin-detail-page .sidebar,
+body.admin-detail-page .main.dashboard-page {
+  height: auto !important;
+  min-height: 100vh !important;
+}
+body.admin-detail-page .table-wrap,
+body.admin-detail-page .table-box,
+body.admin-detail-page .detail-table-box {
+  max-height: none !important;
+  height: auto !important;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+}
+body.admin-detail-page table th {
+  position: static;
+}
+
+/* Workforce Filters and Action Workflow */
+.kpis.one-row.four,
+.workforce-detail-kpis.one-row.four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.status-filter-header {
+  align-items: flex-end;
+}
+
+.asset-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.asset-filter-row {
+  margin: 2px 0 12px;
+}
+
+.case-filter-btn {
+  min-height: 36px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #ffffff;
+  color: var(--secondary);
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: border-color .15s ease, background-color .15s ease, color .15s ease;
+}
+
+.case-filter-btn:hover,
+.case-filter-btn.is-active {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+.table-result-count {
+  margin: 0 0 10px;
+  color: var(--secondary);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.case-type-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.case-type-ai {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.case-type-hitl {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+.support-success-message {
+  min-height: 44px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  margin: 0 0 14px;
+  padding: 10px 15px;
+  border: 1px solid #86efac;
+  border-radius: 12px;
+  background: #f0fdf4;
+  color: #166534;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+
+/* ==========================================================================
+   SECTION: Modals and Overlays
+   ========================================================================== */
+.support-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 4000;
+  padding: 24px;
+  background: rgba(15, 23, 42, .55);
+  overflow-y: auto;
+}
+
+.support-modal.is-open {
+  display: grid;
+  place-items: center;
+}
+
+body.modal-open {
+  overflow: hidden !important;
+}
+
+.support-modal-dialog,
+.support-modal-card {
+  width: min(980px, 96vw);
+  max-height: 92vh;
+  position: relative;
+  overflow-y: auto;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 28px 80px rgba(15, 23, 42, .28);
+}
+
+.support-modal-close {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  border: 0;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: var(--primary);
+  font-size: 25px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.support-modal-close:hover {
+  background: #e2e8f0;
+}
+
+.support-modal-heading {
+  padding-right: 54px;
+  margin-bottom: 18px;
+}
+
+.support-modal-kicker {
+  display: inline-block;
+  margin-bottom: 5px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.support-modal-heading h2 {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -.025em;
+}
+
+.support-modal-heading p {
+  margin-top: 5px;
+  color: var(--secondary);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.support-case-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.support-case-item {
+  min-width: 0;
+  padding: 11px 13px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  background: #f8fafc;
+}
+
+.support-case-item span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--secondary);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.support-case-item strong {
+  display: block;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.support-action-form {
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+.support-form-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.support-form-section[hidden] {
+  display: none !important;
+}
+
+.support-form-section label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+
+/* ==========================================================================
+   SECTION: Buttons and Forms
+   ========================================================================== */
+.support-form-section select {
+  width: 100%;
+  min-height: 43px;
+  padding: 9px 11px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #ffffff;
+  color: var(--primary);
+  outline: none;
+}
+
+.support-form-section select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
+}
+
+.support-form-help {
+  grid-column: 1 / -1;
+  color: var(--secondary);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.support-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.secondary-action-btn {
+  min-height: 38px;
+  padding: 9px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #ffffff;
+  color: var(--secondary);
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.secondary-action-btn:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+  color: var(--primary);
+}
+
+@media (max-width: 1100px) {
+  .kpis.one-row.four,
+  .workforce-detail-kpis.one-row.four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .capacity-filter-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 700px) {
+  .kpis.one-row.four,
+  .workforce-detail-kpis.one-row.four,
+  .support-case-grid,
+  .support-form-section {
+    grid-template-columns: 1fr;
+  }
+  .support-modal {
+    padding: 10px;
+  }
+  .support-modal-dialog,
+  .support-modal-card {
+    width: 100%;
+    padding: 18px;
+  }
+  .support-modal-actions {
+    flex-direction: column-reverse;
+  }
+  .support-modal-actions button {
+    width: 100%;
+  }
+}
+
+
+/* Technician Support Request Review */
+.support-error-message {
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 13px;
+  font-weight: 800;
+}
+.support-request-review {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 4px;
+}
+.support-request-review[hidden] { display: none; }
+.support-review-item {
+  padding: 14px;
+  border: 1px solid #bfdbfe;
+  border-radius: 13px;
+  background: #eff6ff;
+}
+.support-review-item span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--secondary);
+  font-size: 12px;
+  font-weight: 800;
+}
+.support-review-item strong {
+  color: var(--primary);
+  font-size: 15px;
+  line-height: 1.4;
+}
+.support-review-wide { grid-column: 1 / -1; }
+.support-approval-note {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #f8fafc;
+  color: var(--secondary);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+@media (max-width: 700px) {
+  .support-request-review { grid-template-columns: 1fr; }
+  .support-review-wide { grid-column: auto; }
+}
+
+/* SLA Department Analysis */
+.sla-stage-analysis-card { margin-top: 14px; }
+.sla-stage-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+.sla-stage-item {
+  min-height: 92px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #f8fafc;
+}
+.sla-stage-item span {
+  color: var(--secondary);
+  font-size: 12px;
+  font-weight: 800;
+}
+.sla-stage-item strong {
+  margin-top: 5px;
+  font-size: 27px;
+  line-height: 1;
+}
+.sla-stage-item small {
+  margin-top: 5px;
+  font-size: 11px;
+}
+.sla-breach-badge {
+  display: inline-flex;
+  padding: 5px 9px;
+  border: 1px solid #fecaca;
+  border-radius: 999px;
+  background: #fef2f2;
+  color: #dc2626;
+  font-size: 11px;
+  font-weight: 800;
+}
+@media (max-width: 1100px) {
+  .sla-stage-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 680px) {
+  .sla-stage-grid { grid-template-columns: 1fr; }
+}
+
+/* Admin dropdown: Technician Management belongs inside the Admin button. */
+.profile-btn.active {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent);
+}
+.profile-dropdown a.active,
+.profile-dropdown .profile-management-link:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+
+/* =====================================================================
+   Compact support overview card
+   Shows the current support queue and a seven-day activity summary.
+   The full card opens the detailed support-management page.
+   ===================================================================== */
+.support-overview-card {
+  color: var(--primary);
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+
+.support-overview-card:hover {
+  transform: translateY(-2px);
+  border-color: #93c5fd;
+  box-shadow: 0 10px 26px rgba(37, 99, 235, .12);
+}
+
+.support-overview-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.support-overview-header h2 {
+  margin-top: 3px;
+  font-size: 19px;
+  line-height: 1.1;
+}
+
+.support-overview-header p {
+  margin-top: 4px;
+  color: var(--secondary);
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.support-overview-eyebrow {
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.support-overview-cta {
+  flex: 0 0 auto;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.support-overview-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(120px, .72fr) minmax(230px, 1.55fr);
+  gap: 14px;
+  align-items: stretch;
+  margin-top: 14px;
+}
+
+.support-current-total {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 12px 16px;
+  border: 1px solid #bfdbfe;
+  border-radius: 14px;
+  background: #eff6ff;
+}
+
+.support-current-total strong {
+  color: var(--accent);
+  font-size: 42px;
+  line-height: .95;
+}
+
+.support-current-total span {
+  margin-top: 7px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.support-current-total small {
+  margin-top: 3px;
+  color: var(--secondary);
+  font-size: 10.5px;
+}
+
+.support-current-breakdown {
+  display: grid;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.support-breakdown-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 13px;
+  border-bottom: 1px solid var(--border);
+}
+
+.support-breakdown-row:last-child { border-bottom: 0; }
+
+.support-breakdown-row span {
+  color: #374151;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.support-breakdown-row strong {
+  color: var(--accent);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.support-seven-day-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 12px;
+  padding: 10px 13px;
+  border: 1px solid #e0e7ff;
+  border-radius: 12px;
+  background: #f8faff;
+}
+
+.support-seven-day-strip > div {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.support-seven-day-strip span {
+  color: var(--accent);
+  font-size: 9.5px;
+  font-weight: 900;
+  letter-spacing: .06em;
+}
+
+.support-seven-day-strip strong {
+  font-size: 14px;
+}
+
+.support-seven-day-strip p {
+  color: var(--secondary);
+  font-size: 10.5px;
+  line-height: 1.25;
+  text-align: right;
+}
+
+.support-seven-day-strip b {
+  padding: 0 4px;
+  color: #cbd5e1;
+}
+
+@media (max-width: 1100px) {
+  .support-overview-body { grid-template-columns: 1fr; }
+  .support-current-total { min-height: 105px; }
+  .support-seven-day-strip { align-items: flex-start; flex-direction: column; }
+  .support-seven-day-strip p { text-align: left; }
+}
+
+/* =====================================================================
+   Workforce current + 7-day support redesign
+   - Four current snapshot KPIs
+   - Current support actions restored as vertical cards
+   - Separate clickable 7-day support history strip
+   - 7-day SLA analysis kept distinct from current operational charts
+   ===================================================================== */
+.workforce-dashboard-body .workforce-redesign-kpis.kpis.four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.workforce-section-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 20px;
+  margin-bottom: 5px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #eaf2ff;
+  color: #2563eb;
+  font-size: 9.5px;
+  font-weight: 900;
+  letter-spacing: .055em;
+  line-height: 1;
+}
+
+.current-support-section {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.support-section-heading {
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 0;
+}
+
+.support-section-all-link {
+  flex: 0 0 auto;
+  margin-top: 4px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.support-section-all-link:hover { text-decoration: underline; }
+
+.support-action-grid-current {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.support-action-grid-current .support-action-card {
+  min-height: 148px;
+  padding: 13px 14px;
+}
+
+.support-action-grid-current .support-action-card strong {
+  margin-top: 7px;
+  font-size: 28px;
+}
+
+.support-action-grid-current .support-action-card p {
+  margin-top: 7px;
+  font-size: 10.5px;
+  line-height: 1.28;
+}
+
+.support-action-grid-current .support-action-link {
+  padding-top: 8px;
+  font-size: 10.5px;
+}
+
+.support-history-strip {
+  min-height: 50px;
+  display: grid;
+  grid-template-columns: minmax(150px, .7fr) minmax(280px, 1.6fr) auto;
+  align-items: center;
+  gap: 16px;
+  margin-top: 10px;
+  padding: 9px 12px;
+  border: 1px solid #bfdbfe;
+  border-radius: 12px;
+  background: #f8fbff;
+  color: var(--primary);
+  text-decoration: none;
+  transition: border-color .18s ease, background .18s ease, box-shadow .18s ease;
+}
+
+.support-history-strip:hover {
+  border-color: #60a5fa;
+  background: #eff6ff;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, .09);
+}
+
+.support-history-summary {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  white-space: nowrap;
+}
+
+.support-history-summary .workforce-section-tag { margin-bottom: 0; }
+.support-history-summary > strong { font-size: 15px; }
+
+.support-history-breakdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  color: var(--secondary);
+  font-size: 10.5px;
+}
+
+.support-history-breakdown span { white-space: nowrap; }
+.support-history-breakdown strong { margin-left: 3px; color: var(--primary); }
+
+.support-history-cta {
+  color: var(--accent);
+  font-size: 10.5px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* Seven-Day Support History */
+.support-history-filter-card { margin-bottom: 14px; padding: 10px 12px; }
+.support-history-filter-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px;
+}
+.support-history-filter {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  color: #374151;
+  font-size: 11px;
+  font-weight: 800;
+  text-decoration: none;
+}
+.support-history-filter:hover,
+.support-history-filter.active {
+  border-color: #60a5fa;
+  background: #eff6ff;
+  color: var(--accent);
+}
+.support-history-filter strong { font-size: 14px; }
+.support-history-table-card table td { vertical-align: middle; }
+.support-history-reason,
+.support-history-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 8px;
+  border: 1px solid #dbeafe;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 10px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.support-history-reason.reason-outsourcing { border-color: #ddd6fe; background: #f5f3ff; color: #7c3aed; }
+.support-history-reason.reason-senior-support { border-color: #fed7aa; background: #fff7ed; color: #c2410c; }
+.support-history-reason.reason-parts-required { border-color: #bfdbfe; background: #eff6ff; color: #1d4ed8; }
+.support-history-status.pending { border-color: #fde68a; background: #fffbeb; color: #b45309; }
+.support-history-status.processed { border-color: #bbf7d0; background: #f0fdf4; color: #15803d; }
+.support-history-done { color: var(--secondary); font-size: 10.5px; font-weight: 700; }
+
+@media (max-width: 1200px) {
+  .workforce-dashboard-body .workforce-redesign-kpis.kpis.four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .support-history-strip {
+    grid-template-columns: 1fr auto;
+  }
+  .support-history-breakdown {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 900px) {
+  .workforce-dashboard-body .workforce-redesign-kpis.kpis.four,
+  .support-history-filter-row,
+  .support-action-grid-current {
+    grid-template-columns: 1fr;
+  }
+  .support-section-heading { flex-direction: column; }
+  .support-action-grid-current .support-action-card { min-height: 132px; }
+  .support-history-strip { grid-template-columns: 1fr; }
+  .support-history-breakdown { flex-wrap: wrap; gap: 8px 14px; }
+}
+
+/* =====================================================================
+   Workforce dashboard refinement
+   - Simple full-width clickable seven-day support-history row
+   - No duplicated support-type boxes inside the history entry point
+   - SLA history title remains clear without a repeated total badge
+   ===================================================================== */
+.support-history-card {
+  flex: 0 0 auto;
+  min-height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 10px;
+  padding: 10px 14px;
+  border: 1px solid #cfe0fb;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #f7fbff 0%, #ffffff 75%);
+  color: var(--primary);
+  text-decoration: none;
+  transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+.support-history-card:hover {
+  border-color: #60a5fa;
+  box-shadow: 0 7px 18px rgba(37, 99, 235, .10);
+  transform: translateY(-1px);
+}
+
+.support-history-intro {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.support-history-intro > span {
+  color: #2563eb;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .035em;
+  text-transform: uppercase;
+}
+
+.support-history-intro > strong {
+  font-size: 14px;
+  line-height: 1.15;
+}
+
+.support-history-intro > p {
+  overflow: hidden;
+  color: var(--secondary);
+  font-size: 9.5px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.support-history-card .support-history-cta {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: var(--accent);
+  font-size: 10.5px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.sla-history-heading {
+  align-items: flex-start;
+}
+
+@media (max-width: 720px) {
+  .support-history-card {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .support-history-card .support-history-cta {
+    justify-content: flex-start;
+  }
+}

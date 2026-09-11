@@ -1,0 +1,828 @@
+/*
+ * SmartOps Source: assets/css/admin/overview_onepage.css
+ * Purpose: Css / Admin: Overview Onepage visual styling and responsive layout rules.
+ *
+ * Developer Guide section map: Base/Layout, Navigation, Header, KPI Cards,
+ * Cards/Charts, Tables/Filters, Buttons/Forms, Modals, and Responsive Rules.
+ */
+
+/*
+ * SmartOps Admin — one-screen analytics layout
+ * Applies only to the lower analytical sections of Executive Overview and
+ * Smart Maintenance Intelligence. Shared topbar and KPI sizing is controlled
+ * by dashboard_shared.css for all three main dashboards.
+ */
+
+
+/* ==========================================================================
+   SECTION: Responsive Rules
+   ========================================================================== */
+@media (min-width: 1100px) {
+
+/* ==========================================================================
+   SECTION: Base and Page Layout
+   ========================================================================== */
+  :root {
+    /* Topbar, page spacing, and KPI variables come from dashboard_shared.css. */
+    --ops-alert-h: 100px;
+    --ops-routing-h: 100px;
+    --ops-trend-h: clamp(245px, 31dvh, 360px);
+  }
+
+  html,
+  body.overview-dashboard-body:not(.admin-detail-page),
+  body.smart-dashboard-body:not(.admin-detail-page) {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    overflow: hidden !important;
+  }
+
+  body.overview-dashboard-body:not(.admin-detail-page) .layout,
+  body.overview-dashboard-body:not(.admin-detail-page) .dashboard,
+  body.overview-dashboard-body:not(.admin-detail-page) .sidebar,
+  body.smart-dashboard-body:not(.admin-detail-page) .layout,
+  body.smart-dashboard-body:not(.admin-detail-page) .dashboard,
+
+/* ==========================================================================
+   SECTION: Sidebar and Navigation
+   ========================================================================== */
+  body.smart-dashboard-body:not(.admin-detail-page) .sidebar {
+    height: 100dvh !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  body.overview-dashboard-body:not(.admin-detail-page) .main.dashboard-page,
+  body.smart-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    box-sizing: border-box;
+    height: 100dvh !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    display: grid !important;
+    align-content: stretch !important;
+    gap: var(--ops-gap) !important;
+    padding: var(--ops-pad-y) var(--ops-pad-x) !important;
+  }
+
+  /* A bounded trend row prevents the line chart becoming oversized on a
+     large monitor. The lower analytical row receives the remaining height. */
+  body.overview-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    grid-template-rows:
+      var(--ops-topbar-h)
+      var(--ops-kpi-h)
+      var(--ops-alert-h)
+      var(--ops-trend-h)
+      minmax(0, 1fr) !important;
+  }
+
+  body.smart-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    grid-template-rows:
+      var(--ops-topbar-h)
+      var(--ops-kpi-h)
+      var(--ops-routing-h)
+      minmax(0, 1fr) !important;
+  }
+
+  /* Topbar and KPI row styling is centralised in dashboard_shared.css so
+     Executive, Smart Maintenance, and Workforce use one identical system. */
+
+  /* ---------------- Executive Operational Alert ---------------- */
+  .overview-dashboard-body .overview-alerts-card {
+    box-sizing: border-box;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: clamp(10px, 1.05dvh, 14px) clamp(12px, 1vw, 17px) !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+
+/* ==========================================================================
+   SECTION: Tables and Filters
+   ========================================================================== */
+  .overview-dashboard-body .overview-alerts-card .table-header.compact-header {
+    flex: 0 0 auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 0 clamp(7px, 0.8dvh, 10px) !important;
+  }
+
+  .overview-dashboard-body .overview-alerts-card .table-header h2 {
+    margin: 0 !important;
+    font-size: clamp(18px, 1.25vw, 23px) !important;
+    line-height: 1.02 !important;
+  }
+
+  .overview-dashboard-body .overview-alerts-card .table-header p {
+    margin: 3px 0 0 !important;
+    font-size: clamp(10px, 0.72vw, 12.5px) !important;
+    line-height: 1.08 !important;
+  }
+
+  .overview-dashboard-body .alert-grid.four-alerts {
+    flex: 1 1 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    gap: clamp(9px, 0.85vw, 14px) !important;
+  }
+
+  .overview-dashboard-body .alert-box {
+    box-sizing: border-box;
+    height: 100% !important;
+    min-height: 0 !important;
+    padding: clamp(12px, 1.15dvh, 17px) clamp(14px, 1vw, 19px) !important;
+    display: grid !important;
+    grid-template-rows: auto auto minmax(0, 1fr) auto !important;
+    align-items: start !important;
+    overflow: hidden !important;
+  }
+
+  .overview-dashboard-body .alert-label {
+    width: 100%;
+    font-size: clamp(15px, 1.02vw, 19px) !important;
+    line-height: 1.08 !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .overview-dashboard-body .alert-box small {
+    width: 100%;
+    margin: 4px 0 0 !important;
+    font-size: clamp(9.5px, 0.68vw, 12px) !important;
+    line-height: 1.2 !important;
+    overflow: hidden !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Number is vertically centred in the body of the card and aligned left,
+     matching the requested reference layout. */
+  .overview-dashboard-body .alert-box strong {
+    display: block !important;
+    margin: 0 !important;
+    align-self: center !important;
+    justify-self: start !important;
+    font-size: clamp(28px, 2vw, 39px) !important;
+    line-height: 1 !important;
+  }
+
+  .overview-dashboard-body .alert-link {
+    margin: 0 !important;
+    padding: 0 !important;
+    align-self: end !important;
+    justify-self: start !important;
+    font-size: clamp(10px, 0.72vw, 12px) !important;
+    line-height: 1 !important;
+  }
+
+  /* ---------------- Shared trend cards ---------------- */
+  .overview-dashboard-body .overview-trend-card,
+  .smart-dashboard-body .smart-trend-middle-card {
+    box-sizing: border-box;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: clamp(9px, 0.9dvh, 12px) clamp(11px, 0.9vw, 15px) clamp(7px, 0.75dvh, 10px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+  }
+
+  .overview-dashboard-body .trend-chart-header,
+
+/* ==========================================================================
+   SECTION: Cards and Charts
+   ========================================================================== */
+  .smart-dashboard-body .trend-chart-header {
+    flex: 0 0 auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 0 clamp(4px, 0.45dvh, 6px) !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+  }
+
+  .overview-dashboard-body .trend-chart-header > div:first-child,
+  .smart-dashboard-body .trend-chart-header > div:first-child {
+    min-width: 0;
+  }
+
+  .overview-dashboard-body .trend-chart-header h2,
+  .smart-dashboard-body .trend-chart-header h2 {
+    margin: 0 !important;
+    font-size: clamp(15px, 1.05vw, 19px) !important;
+    line-height: 1.05 !important;
+  }
+
+  .overview-dashboard-body .trend-chart-header p,
+  .smart-dashboard-body .trend-chart-header p {
+    margin: 2px 0 0 !important;
+    font-size: clamp(8.5px, 0.65vw, 10.5px) !important;
+    line-height: 1.08 !important;
+  }
+
+  .overview-dashboard-body .trend-inline-legend,
+  .smart-dashboard-body .trend-inline-legend {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: clamp(12px, 1.2vw, 20px);
+    padding-top: 2px;
+    font-size: clamp(8.5px, 0.65vw, 10.5px);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .overview-dashboard-body .trend-inline-legend span,
+  .smart-dashboard-body .trend-inline-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .overview-dashboard-body .trend-legend-line,
+  .smart-dashboard-body .trend-legend-line {
+    position: relative;
+    display: inline-block;
+    width: clamp(24px, 2vw, 34px) !important;
+    height: 0 !important;
+    border-top: 2px solid currentColor;
+  }
+
+  .overview-dashboard-body .trend-legend-line::after,
+  .smart-dashboard-body .trend-legend-line::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 6px !important;
+    height: 6px !important;
+    border: 1.5px solid currentColor;
+    border-radius: 50%;
+    background: #fff;
+    transform: translate(-50%, -50%);
+  }
+
+  .overview-dashboard-body .trend-legend-blue,
+  .smart-dashboard-body .trend-legend-blue { color: #2563eb; }
+
+  .overview-dashboard-body .trend-legend-teal,
+  .smart-dashboard-body .trend-legend-teal {
+    color: #14b8a6;
+    border-top-style: dashed;
+  }
+
+  .overview-dashboard-body .overview-trend-box,
+  .smart-dashboard-body .smart-middle-chart-box {
+    flex: 1 1 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: hidden !important;
+  }
+
+  .overview-dashboard-body .overview-trend-box canvas,
+  .smart-dashboard-body .smart-middle-chart-box canvas {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .overview-dashboard-body .trend-bottom-legend,
+  .smart-dashboard-body .trend-bottom-legend { display: none !important; }
+
+  /* ---------------- Lower analytical row ---------------- */
+  .overview-dashboard-body .overview-bottom-grid,
+  .smart-dashboard-body .smart-bottom-grid {
+    box-sizing: border-box;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    gap: clamp(8px, 0.8vw, 12px) !important;
+    overflow: hidden !important;
+  }
+
+  .overview-dashboard-body .compact-chart-card,
+  .smart-dashboard-body .smart-bottom-grid .chart-card {
+    box-sizing: border-box;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding: clamp(8px, 0.8dvh, 11px) clamp(10px, 0.8vw, 13px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+  }
+
+  .overview-dashboard-body .compact-chart-card .chart-header,
+  .smart-dashboard-body .smart-bottom-grid .chart-header {
+    flex: 0 0 auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 0 4px !important;
+  }
+
+  .overview-dashboard-body .compact-chart-card .chart-header h2,
+  .smart-dashboard-body .smart-bottom-grid .chart-header h2 {
+    margin: 0 !important;
+    font-size: clamp(14px, 0.98vw, 17px) !important;
+    line-height: 1.05 !important;
+  }
+
+  .overview-dashboard-body .compact-chart-card .chart-header p,
+  .smart-dashboard-body .smart-bottom-grid .chart-header p {
+    margin: 2px 0 0 !important;
+    font-size: clamp(8px, 0.6vw, 10px) !important;
+    line-height: 1.05 !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .overview-dashboard-body .capacity-snapshot,
+  .overview-dashboard-body .overview-bottom-chart-box,
+  .smart-dashboard-body .smart-lower-chart-box {
+    flex: 1 1 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: hidden !important;
+  }
+
+  .overview-dashboard-body .capacity-snapshot {
+    grid-template-columns: 43% 57% !important;
+    align-items: center !important;
+    gap: clamp(7px, 0.75vw, 11px) !important;
+    padding-top: 2px !important;
+  }
+
+  .overview-dashboard-body .capacity-gauge-wrap {
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    align-self: stretch !important;
+  }
+
+  .overview-dashboard-body .capacity-legend {
+    align-self: center !important;
+    gap: clamp(5px, 0.55dvh, 8px) !important;
+    padding: 0 4px 0 0 !important;
+  }
+
+  .overview-dashboard-body .capacity-row {
+    grid-template-columns: 8px 1fr auto !important;
+    gap: 6px !important;
+    padding-bottom: clamp(4px, 0.45dvh, 7px) !important;
+    font-size: clamp(9px, 0.66vw, 11px) !important;
+    line-height: 1 !important;
+  }
+
+  .overview-dashboard-body .capacity-dot {
+    width: 7px !important;
+    height: 7px !important;
+  }
+
+  .overview-dashboard-body .capacity-total {
+    padding-top: 5px !important;
+    font-size: clamp(9px, 0.66vw, 11px) !important;
+  }
+
+  .overview-dashboard-body .overview-bottom-chart-box canvas,
+  .smart-dashboard-body .smart-lower-chart-box canvas {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* ---------------- Smart Maintenance combined analytics area ---------------- */
+  .smart-dashboard-body .smart-analytics-grid {
+    box-sizing: border-box;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.62fr) minmax(340px, 1fr) !important;
+    gap: clamp(8px, 0.8vw, 12px) !important;
+    align-items: stretch !important;
+    overflow: hidden !important;
+  }
+
+  .smart-dashboard-body .smart-analytics-main,
+  .smart-dashboard-body .smart-analytics-side,
+  .smart-dashboard-body .smart-side-chart-card {
+    box-sizing: border-box;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .smart-dashboard-body .smart-analytics-main,
+  .smart-dashboard-body .smart-side-chart-card {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .smart-dashboard-body .smart-analytics-side {
+    display: grid !important;
+    grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
+    gap: clamp(8px, 0.8vw, 12px) !important;
+  }
+
+  .smart-dashboard-body .smart-side-chart-card {
+    padding: clamp(8px, 0.8dvh, 11px) clamp(10px, 0.8vw, 13px) !important;
+  }
+
+  .smart-dashboard-body .smart-side-chart-card .chart-header {
+    flex: 0 0 auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 0 4px !important;
+  }
+
+  .smart-dashboard-body .smart-side-chart-card .chart-header h2 {
+    margin: 0 !important;
+    font-size: clamp(14px, 0.98vw, 17px) !important;
+    line-height: 1.05 !important;
+  }
+
+  .smart-dashboard-body .smart-side-chart-card .chart-header p {
+    margin: 2px 0 0 !important;
+    font-size: clamp(8px, 0.6vw, 10px) !important;
+    line-height: 1.05 !important;
+  }
+
+  .smart-dashboard-body .smart-side-chart-card .smart-lower-chart-box {
+    flex: 1 1 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: hidden !important;
+  }
+
+  .smart-dashboard-body .smart-side-chart-card .smart-lower-chart-box canvas {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* ---------------- Smart Maintenance routing row ---------------- */
+  .smart-dashboard-body .routing-summary-card {
+    box-sizing: border-box;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: clamp(9px, 0.9dvh, 12px) clamp(11px, 0.9vw, 15px) !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .smart-dashboard-body .routing-summary-card .chart-header {
+    flex: 0 0 auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 0 clamp(5px, 0.6dvh, 8px) !important;
+  }
+
+  .smart-dashboard-body .routing-summary-card .chart-header h2 {
+    margin: 0 !important;
+    font-size: clamp(15px, 1.05vw, 19px) !important;
+    line-height: 1 !important;
+  }
+
+  .smart-dashboard-body .routing-summary-card .chart-header p {
+    margin: 2px 0 0 !important;
+    font-size: clamp(8.5px, 0.64vw, 10.5px) !important;
+    line-height: 1 !important;
+  }
+
+  .smart-dashboard-body .routing-status-grid {
+    flex: 1 1 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    gap: clamp(8px, 0.8vw, 12px) !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel {
+    box-sizing: border-box;
+    height: 100% !important;
+    min-height: 0 !important;
+    padding: clamp(8px, 0.8dvh, 11px) clamp(12px, 0.9vw, 16px) !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel h3 {
+    margin: 0 !important;
+    font-size: clamp(12px, 0.86vw, 15px) !important;
+    line-height: 1 !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel strong {
+    margin: clamp(3px, 0.45dvh, 6px) 0 0 !important;
+    font-size: clamp(22px, 1.6vw, 30px) !important;
+    line-height: 0.96 !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel p {
+    margin: clamp(3px, 0.4dvh, 5px) 0 0 !important;
+    font-size: clamp(8px, 0.6vw, 10px) !important;
+    line-height: 1 !important;
+  }
+}
+
+/* Keep Smart Maintenance routing panels visually aligned with the
+   Executive Overview operational-alert cards. */
+@media (min-width: 1100px) {
+  .smart-dashboard-body .routing-status-panel {
+    display: grid !important;
+    grid-template-rows: auto auto minmax(0, 1fr) !important;
+    align-items: start !important;
+  }
+
+  .smart-dashboard-body .routing-status-panel strong {
+    align-self: center !important;
+  }
+}
+
+
+/* Short desktop windows retain one-page behaviour. The alert and trend rows
+   reduce proportionally while preserving readable cards. */
+@media (min-width: 1100px) and (max-height: 700px) {
+  :root {
+    --ops-alert-h: 96px;
+    --ops-routing-h: 96px;
+    --ops-trend-h: 215px;
+  }
+
+  .overview-dashboard-body .topbar p,
+  .smart-dashboard-body .topbar p,
+  .overview-dashboard-body .compact-chart-card .chart-header p,
+  .smart-dashboard-body .smart-bottom-grid .chart-header p {
+    display: none !important;
+  }
+
+  .overview-dashboard-body .overview-alerts-card .table-header p,
+  .smart-dashboard-body .routing-summary-card .chart-header p {
+    font-size: 8px !important;
+  }
+
+  .overview-dashboard-body .alert-box {
+    padding: 7px 9px !important;
+  }
+
+  .overview-dashboard-body .alert-box small {
+    -webkit-line-clamp: 1;
+  }
+}
+
+/* Tablet and mobile retain their existing scrolling responsive layout. */
+
+
+/* ===== Executive Overview three-chart left/right composition ===== */
+@media (min-width: 1100px) {
+  body.overview-dashboard-body:not(.admin-detail-page) .main.dashboard-page {
+    grid-template-rows:
+      var(--ops-topbar-h)
+      var(--ops-kpi-h)
+      var(--ops-alert-h)
+      minmax(0, 1fr) !important;
+  }
+
+  .overview-dashboard-body .overview-analytics-layout {
+    box-sizing: border-box;
+    display: grid !important;
+    grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr) !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    gap: clamp(8px, 0.8vw, 12px) !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .overview-dashboard-body .overview-primary-chart {
+    box-sizing: border-box;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: clamp(10px, 1dvh, 14px) clamp(12px, 1vw, 16px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+  }
+
+  .overview-dashboard-body .overview-primary-chart .trend-chart-header {
+    flex: 0 0 auto !important;
+    margin: 0 0 clamp(6px, 0.7dvh, 9px) !important;
+  }
+
+  .overview-dashboard-body .overview-primary-chart .trend-chart-header h2 {
+    font-size: clamp(17px, 1.15vw, 21px) !important;
+  }
+
+  .overview-dashboard-body .overview-primary-chart .overview-trend-box {
+    flex: 1 1 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  .overview-dashboard-body .overview-side-charts {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
+    gap: clamp(8px, 0.8dvh, 12px) !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .overview-dashboard-body .overview-side-charts .compact-chart-card {
+    box-sizing: border-box;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding: clamp(8px, 0.8dvh, 11px) clamp(10px, 0.8vw, 13px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+  }
+
+  .overview-dashboard-body .overview-side-charts .chart-header {
+    flex: 0 0 auto !important;
+    margin: 0 0 4px !important;
+  }
+
+  .overview-dashboard-body .overview-side-charts .chart-header h2 {
+    font-size: clamp(14px, 0.98vw, 18px) !important;
+  }
+
+  .overview-dashboard-body .overview-side-charts .chart-header p {
+    white-space: normal !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    font-size: clamp(8px, 0.6vw, 10px) !important;
+    line-height: 1.12 !important;
+  }
+
+  .overview-dashboard-body .overview-side-charts .capacity-snapshot,
+  .overview-dashboard-body .overview-side-charts .overview-bottom-chart-box {
+    flex: 1 1 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: hidden !important;
+  }
+
+  .overview-dashboard-body .overview-side-charts .capacity-snapshot {
+    grid-template-columns: 43% 57% !important;
+    gap: clamp(6px, 0.65vw, 10px) !important;
+  }
+
+  .overview-dashboard-body .overview-side-charts .capacity-gauge-wrap {
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  .overview-dashboard-body .overview-side-charts canvas {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .overview-dashboard-body .trend-legend-box {
+    width: clamp(10px, 0.7vw, 13px) !important;
+    height: clamp(10px, 0.7vw, 13px) !important;
+  }
+}
+
+
+/* desktop balance: give the two right-side charts more width. */
+@media (min-width: 1100px) {
+  .overview-dashboard-body .overview-analytics-layout {
+    grid-template-columns: minmax(0, 1.55fr) minmax(360px, 1fr) !important;
+  }
+  .overview-dashboard-body .overview-primary-chart .trend-chart-header {
+    margin-bottom: 2px !important;
+  }
+  .overview-dashboard-body .trend-bottom-legend {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    justify-content: center !important;
+    gap: clamp(12px, 1vw, 18px) !important;
+    padding: 3px 0 0 !important;
+    font-size: clamp(8px, 0.58vw, 9.5px) !important;
+    line-height: 1 !important;
+  }
+  .overview-dashboard-body .trend-bottom-legend .trend-legend-box {
+    width: 9px !important;
+    height: 9px !important;
+  }
+}
+
+/* Capacity legend: keep percentage values fully inside the card. */
+.overview-dashboard-body .capacity-legend {
+  box-sizing: border-box !important;
+  min-width: 0 !important;
+  padding-right: 12px !important;
+}
+.overview-dashboard-body .capacity-row strong,
+.overview-dashboard-body .capacity-total strong {
+  white-space: nowrap !important;
+  padding-right: 2px !important;
+}
+@media (min-width: 1100px) {
+  .overview-dashboard-body .overview-side-charts .capacity-snapshot {
+    grid-template-columns: 42% minmax(0, 58%) !important;
+  }
+  .overview-dashboard-body .overview-side-charts .capacity-legend {
+    padding-right: 14px !important;
+  }
+}
+
+
+/* Compact Executive Operational Alert cards to match the KPI row. */
+@media (min-width: 1100px) {
+  .overview-dashboard-body .overview-alerts-card {
+    padding: clamp(7px, .72dvh, 9px) clamp(11px, .85vw, 14px) !important;
+  }
+
+  .overview-dashboard-body .overview-alerts-card .table-header.compact-header {
+    margin-bottom: clamp(5px, .52dvh, 7px) !important;
+  }
+
+  .overview-dashboard-body .overview-alerts-card .table-header h2 {
+    font-size: clamp(15px, 1vw, 18px) !important;
+  }
+
+  .overview-dashboard-body .overview-alerts-card .table-header p {
+    margin-top: 2px !important;
+    font-size: clamp(9px, .64vw, 11px) !important;
+  }
+
+  .overview-dashboard-body .alert-grid.four-alerts {
+    gap: clamp(8px, .72vw, 11px) !important;
+  }
+
+  .overview-dashboard-body .alert-box {
+    min-height: 0 !important;
+    padding: clamp(7px, .72dvh, 10px) clamp(10px, .78vw, 13px) !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-rows: auto auto minmax(0, 1fr) !important;
+    column-gap: 8px !important;
+    row-gap: 1px !important;
+  }
+
+  .overview-dashboard-body .alert-label {
+    grid-column: 1 / -1 !important;
+    font-size: clamp(12px, .84vw, 14px) !important;
+    line-height: 1.05 !important;
+  }
+
+  .overview-dashboard-body .alert-box small {
+    grid-column: 1 / -1 !important;
+    margin: 1px 0 0 !important;
+    font-size: clamp(8px, .56vw, 9.5px) !important;
+    line-height: 1.08 !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    display: block !important;
+  }
+
+  .overview-dashboard-body .alert-box strong {
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+    align-self: end !important;
+    font-size: clamp(23px, 1.55vw, 29px) !important;
+  }
+
+  .overview-dashboard-body .alert-link {
+    grid-column: 2 !important;
+    grid-row: 3 !important;
+    align-self: end !important;
+    justify-self: end !important;
+    font-size: clamp(8.5px, .6vw, 10px) !important;
+  }
+}

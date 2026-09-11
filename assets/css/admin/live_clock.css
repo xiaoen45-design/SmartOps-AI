@@ -1,0 +1,167 @@
+/*
+ * SmartOps Source: assets/css/admin/live_clock.css
+ * Purpose: Css / Admin: Live Clock visual styling and responsive layout rules.
+ *
+ * Developer Guide section map: Base/Layout, Navigation, Header, KPI Cards,
+ * Cards/Charts, Tables/Filters, Buttons/Forms, Modals, and Responsive Rules.
+ */
+
+/* Professional live clock shared by the four main Admin dashboards */
+
+/* ==========================================================================
+   SECTION: Top Bar and Page Header
+   ========================================================================== */
+.topbar:has(.live-clock) {
+  align-items: center;
+}
+
+.live-clock {
+  width: 242px;
+  min-width: 242px;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px 10px 12px;
+  border: 1px solid #dbe3ee;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+  box-shadow: 0 5px 16px rgba(15, 23, 42, 0.07);
+  color: var(--primary, #111827);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.live-clock-icon {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #d8e7ff;
+  border-radius: 10px;
+  background: #edf5ff;
+  color: var(--accent, #2563eb);
+}
+
+.live-clock-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.live-clock-content {
+  min-width: 0;
+  flex: 1;
+  display: grid;
+  gap: 1px;
+}
+
+.live-clock-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  line-height: 1;
+}
+
+.live-clock-location {
+  overflow: hidden;
+  color: var(--secondary, #6b7280);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+}
+
+.live-clock-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #15803d;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.live-clock-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.10);
+}
+
+.live-clock-time-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.live-clock-time {
+  color: var(--primary, #111827);
+  font-size: 22px;
+  font-weight: 850;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+}
+
+.live-clock-period {
+  color: var(--accent, #2563eb);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.live-clock-date {
+  overflow: hidden;
+  color: var(--secondary, #6b7280);
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+}
+
+
+/* ==========================================================================
+   SECTION: Responsive Rules
+   ========================================================================== */
+@media (max-width: 1000px) {
+  .live-clock {
+    width: 222px;
+    min-width: 222px;
+    min-height: 64px;
+    gap: 10px;
+    padding: 9px 12px 9px 10px;
+  }
+
+  .live-clock-icon {
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+  }
+
+  .live-clock-time {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 680px) {
+  .topbar:has(.live-clock) {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .live-clock {
+    width: 100%;
+    min-width: 0;
+  }
+}

@@ -1,0 +1,172 @@
+/*
+ * SmartOps Source: assets/css/admin/settings.css
+ * Purpose: Css / Admin: Settings visual styling and responsive layout rules.
+ *
+ * Developer Guide section map: Base/Layout, Navigation, Header, KPI Cards,
+ * Cards/Charts, Tables/Filters, Buttons/Forms, Modals, and Responsive Rules.
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+
+/* ==========================================================================
+   SECTION: Base and Page Layout
+   ========================================================================== */
+:root {
+  --bg: #f4f6f9;
+  --card: #ffffff;
+  --primary: #111827;
+  --secondary: #6b7280;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --border: #e5e7eb;
+  --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: var(--bg);
+  color: var(--primary);
+}
+
+.settings-page {
+  width: min(100%, 720px);
+}
+
+.settings-card {
+  padding: 32px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.profile-avatar {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+h1 { margin-bottom: 6px; font-size: 28px; }
+.subtitle { margin-bottom: 24px; color: var(--secondary); }
+.profile-info { display: grid; gap: 16px; text-align: left; }
+label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--secondary);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* ==========================================================================
+   SECTION: Buttons and Forms
+   ========================================================================== */
+input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #ffffff;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+input:disabled { background: #f9fafb; color: var(--primary); }
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+button {
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+button:hover { background: var(--accent-hover); }
+.secondary-btn { background: #64748b; }
+.hidden { display: none !important; }
+.back-link {
+  display: inline-block;
+  margin-top: 22px;
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+
+/* ==========================================================================
+   SECTION: Modals and Overlays
+   ========================================================================== */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(17, 24, 39, 0.45);
+}
+
+.modal-content {
+  width: min(100%, 420px);
+  padding: 24px;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.2);
+}
+.modal-content h2 { margin-bottom: 18px; }
+.modal-content input { margin-bottom: 14px; }
+#passwordMessage { margin-top: 4px; font-size: 13px; font-weight: 700; }
+.error-message { color: #dc2626; }
+.success-message { color: #16a34a; }
+
+
+/* ==========================================================================
+   SECTION: Responsive Rules
+   ========================================================================== */
+@media (max-width: 560px) {
+  body { padding: 14px; }
+  .settings-card { padding: 24px 18px; }
+}
+
+/* Admin dropdown: Technician Management belongs inside the Admin button. */
+.profile-btn.active {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent);
+}
+.profile-dropdown a.active,
+.profile-dropdown .profile-management-link:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+}

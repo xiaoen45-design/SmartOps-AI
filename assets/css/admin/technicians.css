@@ -1,0 +1,1031 @@
+/*
+ * SmartOps Source: assets/css/admin/technicians.css
+ * Purpose: Css / Admin: Technicians visual styling and responsive layout rules.
+ *
+ * Developer Guide section map: Base/Layout, Navigation, Header, KPI Cards,
+ * Cards/Charts, Tables/Filters, Buttons/Forms, Modals, and Responsive Rules.
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+
+/* ==========================================================================
+   SECTION: Base and Page Layout
+   ========================================================================== */
+:root {
+  --bg: #f4f6f9;
+  --card: #ffffff;
+  --primary: #111827;
+  --secondary: #6b7280;
+  --accent: #2563eb;
+  --accent-light: #eaf2ff;
+  --border: #e5e7eb;
+  --shadow: 0 3px 10px rgba(15, 23, 42, 0.06);
+  --red: #ef4444;
+  --dark-red: #dc2626;
+}
+
+html { zoom: .9; }
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--primary);
+  font-size: 14px;
+}
+button, input, select, textarea { font: inherit; }
+a { color: inherit; }
+
+.layout,
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+
+/* ==========================================================================
+   SECTION: Sidebar and Navigation
+   ========================================================================== */
+.sidebar {
+  width: 220px;
+  min-width: 220px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 18px;
+  border-right: 1px solid var(--border);
+  background: var(--card);
+}
+
+.brand,
+.logo {
+  margin: 0 0 38px;
+  padding-left: 4px;
+}
+.brand h2,
+.logo h2 {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -.04em;
+}
+.smart { color: var(--primary); }
+.stay { color: var(--accent); }
+.brand p,
+.logo p {
+  margin-top: 2px;
+  color: var(--secondary);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.nav,
+.sidebar nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.nav a,
+.sidebar nav a {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--card);
+  color: var(--primary);
+  box-shadow: var(--shadow);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.18;
+  text-decoration: none;
+}
+.nav a:hover,
+.nav a.active,
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+.profile-container,
+.sidebar-admin-profile {
+  position: relative;
+  margin-top: auto;
+}
+.profile-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--primary);
+  box-shadow: var(--shadow);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.profile-btn:hover,
+.profile-btn.active {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent);
+}
+.profile-avatar {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 800;
+}
+.profile-dropdown {
+  width: 100%;
+  display: none;
+  position: absolute;
+  bottom: 52px;
+  left: 0;
+  z-index: 1000;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: 0 10px 26px rgba(15, 23, 42, .14);
+}
+.profile-dropdown.is-open { display: block; }
+.profile-dropdown a {
+  display: block;
+  padding: 12px 15px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.profile-dropdown a:last-child { border-bottom: 0; }
+.profile-dropdown a:hover,
+.profile-dropdown a.active,
+.profile-dropdown .profile-management-link:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+.main,
+.main-content,
+.main.dashboard-page {
+  flex: 1;
+  min-width: 0;
+  padding: 16px 20px 24px;
+}
+
+/* ==========================================================================
+   SECTION: Top Bar and Page Header
+   ========================================================================== */
+.topbar {
+  min-height: 58px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 12px;
+}
+.topbar h1 {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -.035em;
+}
+.topbar p {
+  margin-top: 4px;
+  color: var(--secondary);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.card,
+
+/* ==========================================================================
+   SECTION: KPI Cards and Summary Metrics
+   ========================================================================== */
+.kpi {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+.card { padding: 18px; }
+.kpis {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.technician-management-kpis { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.kpi {
+  min-height: 98px;
+  padding: 14px 16px;
+}
+.kpi h3 {
+  margin-bottom: 7px;
+  color: var(--secondary);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.kpi h2 {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+}
+.kpi p {
+  margin-top: 8px;
+  color: var(--secondary);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.management-message {
+  margin-bottom: 12px;
+  padding: 12px 15px;
+  border: 1px solid;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.success-message { border-color: #bbf7d0; background: #f0fdf4; color: #166534; }
+.error-message { border-color: #fecaca; background: #fef2f2; color: #b91c1c; }
+
+.management-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+.management-header h2 { font-size: 20px; font-weight: 800; }
+.management-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.primary-btn,
+.secondary-btn,
+.danger-btn {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 14px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+.primary-btn { border: 1px solid var(--accent); background: var(--accent); color: #fff; }
+.primary-btn:hover { background: #1d4ed8; }
+.secondary-btn { border: 1px solid var(--border); background: #fff; color: var(--primary); }
+.secondary-btn:hover { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
+.danger-btn { border: 1px solid var(--dark-red); background: var(--dark-red); color: #fff; }
+.danger-btn:hover { background: #b91c1c; }
+
+
+/* ==========================================================================
+   SECTION: Tables and Filters
+   ========================================================================== */
+.management-filters {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.6fr) repeat(4, minmax(125px, 1fr)) minmax(180px, auto);
+  gap: 10px;
+  align-items: end;
+  margin-bottom: 14px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #f8fafc;
+}
+.management-filters label,
+.record-view-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.management-filters label > span,
+.record-view-toggle > span {
+  color: var(--secondary);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.management-filters input,
+.management-filters select,
+.management-form input,
+
+/* ==========================================================================
+   SECTION: Buttons and Forms
+   ========================================================================== */
+.management-form select {
+  width: 100%;
+  min-height: 40px;
+  padding: 9px 11px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--primary);
+  outline: none;
+}
+.management-filters input:focus,
+.management-filters select:focus,
+.management-form input:focus,
+.management-form select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .10);
+}
+.record-view-toggle {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.record-view-toggle > span { width: 100%; }
+.record-view-toggle a {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 11px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--secondary);
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+}
+.record-view-toggle a.active { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
+.record-view-toggle small { margin-left: 4px; font-size: 10px; }
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+.management-table-wrap {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+#technicianManagementTable { min-width: 1240px; }
+th,
+td {
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: middle;
+  font-size: 13px;
+}
+th {
+  background: #f8fafc;
+  color: var(--secondary);
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+tbody tr:hover { background: #f8fbff; }
+.empty-table-message {
+  padding: 28px !important;
+  color: var(--secondary) !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+}
+#technicianManagementTable td > small,
+#technicianManagementTable td .contact-main {
+  display: block;
+  max-width: 220px;
+  margin-top: 4px;
+  overflow: hidden;
+  color: var(--secondary);
+  font-size: 11px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#technicianManagementTable td .contact-main {
+  margin-top: 0;
+  color: var(--primary);
+  font-size: 12px;
+}
+.inactive-technician-row { background: #f8fafc; }
+.role-badge,
+.level-badge,
+.status-badge,
+.deleted-label {
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.role-badge.ai-role { background: #eaf2ff; color: #1d4ed8; }
+.role-badge.hitl-role { background: #f3e8ff; color: #7e22ce; }
+.level-junior { background: #f3f4f6; color: #4b5563; }
+.level-senior { background: #fff7ed; color: #c2410c; }
+.status-available { background: #dcfce7; color: #15803d; }
+.status-busy { background: #dbeafe; color: #1d4ed8; }
+.status-on-leave { background: #fef3c7; color: #b45309; }
+.status-resigned,
+.deleted-label { background: #f3f4f6; color: #6b7280; }
+.capacity-cell { min-width: 115px; }
+.capacity-cell > strong { display: block; margin-bottom: 6px; font-size: 12px; }
+.capacity-cell > span {
+  width: 100%;
+  height: 7px;
+  display: block;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e5e7eb;
+}
+.capacity-cell i { height: 100%; display: block; border-radius: inherit; background: var(--accent); }
+.overdue-text { color: var(--dark-red) !important; }
+.row-actions { display: flex; gap: 7px; }
+.table-action {
+  min-height: 32px;
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.select-action { color: #15803d; }
+.select-action:hover { border-color: #16a34a; background: #f0fdf4; }
+.edit-action { color: var(--accent); }
+.edit-action:hover { border-color: var(--accent); background: var(--accent-light); }
+.delete-action { color: var(--dark-red); }
+.delete-action:hover { border-color: var(--red); background: #fef2f2; }
+.table-result-count {
+  margin-top: 10px;
+  color: var(--secondary);
+  font-size: 12px;
+  font-weight: 700;
+  text-align: right;
+}
+
+
+/* ==========================================================================
+   SECTION: Modals and Overlays
+   ========================================================================== */
+.management-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  background: rgba(15, 23, 42, .55);
+  backdrop-filter: blur(3px);
+}
+.management-modal.is-open { display: flex; }
+.management-modal-dialog {
+  width: min(760px, 100%);
+  max-height: calc(100vh - 44px);
+  position: relative;
+  overflow-y: auto;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, .22);
+}
+.management-modal-close {
+  width: 34px;
+  height: 34px;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--secondary);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+.modal-heading { padding-right: 44px; }
+.modal-heading > span {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.modal-heading h2 { margin-top: 5px; font-size: 23px; font-weight: 800; }
+.modal-heading p { margin-top: 6px; color: var(--secondary); font-size: 13px; line-height: 1.45; }
+.modal-heading.centered { padding: 0; text-align: center; }
+.management-form { margin-top: 18px; }
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+}
+.form-grid label { display: flex; flex-direction: column; gap: 6px; }
+.form-grid label > span { color: var(--primary); font-size: 12px; font-weight: 800; }
+.form-grid label > small { color: var(--secondary); font-size: 10px; line-height: 1.35; }
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 9px;
+  margin-top: 20px;
+}
+.select-dialog { width: min(650px, 100%); }
+.selected-technician-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+.selected-technician-grid > div {
+  min-height: 72px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  background: #f8fafc;
+}
+.selected-technician-grid span { display: block; color: var(--secondary); font-size: 11px; font-weight: 800; }
+.selected-technician-grid strong { display: block; margin-top: 6px; font-size: 14px; line-height: 1.35; word-break: break-word; }
+.delete-dialog { width: min(520px, 100%); }
+.delete-icon {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: #fee2e2;
+  color: var(--dark-red);
+  font-size: 24px;
+  font-weight: 900;
+}
+.delete-summary {
+  margin-top: 16px;
+  padding: 13px;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  background: #fef2f2;
+  color: #991b1b;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+}
+
+body.technician-management-body,
+body.technician-management-body .layout,
+body.technician-management-body .dashboard,
+body.technician-management-body .sidebar,
+body.technician-management-body .main.dashboard-page {
+  height: auto !important;
+  min-height: 100vh !important;
+}
+body.technician-management-body { overflow-y: auto !important; }
+
+
+/* ==========================================================================
+   SECTION: Responsive Rules
+   ========================================================================== */
+@media (max-width: 1280px) {
+  .technician-management-kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .management-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .management-header { flex-direction: column; }
+  .management-header-actions { justify-content: flex-start; }
+}
+@media (max-width: 900px) {
+  html { zoom: 1; }
+  .layout,
+  .dashboard { flex-direction: column; }
+  .sidebar { width: 100%; min-width: 0; min-height: auto; }
+  .nav,
+  .sidebar nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .profile-container { margin-top: 16px; }
+  .profile-dropdown { top: 52px; bottom: auto; }
+}
+@media (max-width: 760px) {
+  .technician-management-kpis,
+  .management-filters,
+  .form-grid { grid-template-columns: 1fr; }
+  .management-header-actions { width: 100%; }
+  .management-header-actions > * { flex: 1 1 100%; }
+  .management-modal { padding: 10px; }
+  .management-modal-dialog { padding: 20px 16px; border-radius: 14px; }
+  .modal-actions { flex-direction: column-reverse; }
+  .modal-actions > * { width: 100%; }
+}
+@media (max-width: 560px) {
+  .main,
+  .main-content,
+  .main.dashboard-page { padding: 14px; }
+  .nav,
+  .sidebar nav { grid-template-columns: 1fr; }
+  .selected-technician-grid { grid-template-columns: 1fr; }
+}
+
+/* Technician Management CRUD Workspace */
+.technician-management-body .topbar p {
+  max-width: 760px;
+}
+
+.simplified-management-header {
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.simplified-management-header > div:first-child {
+  min-width: 0;
+}
+
+.simplified-management-header h2 {
+  margin-bottom: 3px;
+}
+
+.simplified-management-header p {
+  color: var(--secondary);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.add-technician-btn {
+  min-height: 40px;
+  padding-inline: 16px;
+  white-space: nowrap;
+}
+
+.directory-record-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.directory-record-tabs a {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 11px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  color: var(--secondary);
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.directory-record-tabs a:hover {
+  background: #f8fafc;
+  color: var(--primary);
+}
+
+.directory-record-tabs a.active {
+  border-color: #bfdbfe;
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+.directory-record-tabs a span {
+  min-width: 22px;
+  height: 22px;
+  display: inline-grid;
+  place-items: center;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.82);
+  font-size: 10px;
+}
+
+.simplified-filters {
+  grid-template-columns: minmax(250px, 1.7fr) repeat(4, minmax(120px, 1fr)) auto;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding: 10px;
+}
+
+.simplified-filters .search-field input {
+  padding-left: 12px;
+}
+
+.filter-reset-btn {
+  min-width: 72px;
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--secondary);
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.filter-reset-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+/* Make the directory easier to scan: identity and actions are the visual anchors. */
+#technicianManagementTable th:first-child,
+#technicianManagementTable td:first-child {
+  padding-left: 16px;
+}
+
+#technicianManagementTable th:last-child,
+#technicianManagementTable td:last-child {
+  padding-right: 16px;
+}
+
+#technicianManagementTable tbody td:first-child > strong {
+  font-size: 12px;
+}
+
+#technicianManagementTable tbody td:first-child > small {
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.row-actions {
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.table-action {
+  min-height: 30px;
+  padding: 6px 9px;
+}
+
+/* View is informational, Edit is primary CRUD maintenance, Delete remains destructive. */
+.select-action {
+  color: var(--secondary);
+}
+.select-action:hover {
+  border-color: #94a3b8;
+  background: #f8fafc;
+  color: var(--primary);
+}
+
+.edit-action {
+  border-color: #bfdbfe;
+  background: #eff6ff;
+  color: var(--accent);
+}
+
+@media (max-width: 1380px) {
+  .simplified-filters {
+    grid-template-columns: minmax(240px, 1.5fr) repeat(2, minmax(130px, 1fr)) repeat(2, minmax(110px, .8fr)) auto;
+  }
+}
+
+@media (max-width: 1100px) {
+  .simplified-filters {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .simplified-filters .search-field {
+    grid-column: span 2;
+  }
+  .filter-reset-btn {
+    align-self: end;
+  }
+}
+
+@media (max-width: 760px) {
+  .simplified-management-header {
+    align-items: stretch;
+  }
+  .add-technician-btn {
+    width: 100%;
+  }
+  .directory-record-tabs {
+    overflow-x: auto;
+  }
+  .directory-record-tabs a {
+    flex: 0 0 auto;
+  }
+  .simplified-filters,
+  .simplified-filters .search-field {
+    grid-template-columns: 1fr;
+    grid-column: auto;
+  }
+}
+
+/* Technician Master Data CRUD Controls */
+.technician-management-kpis.master-data-kpis {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.master-data-filters {
+  grid-template-columns: minmax(280px, 1.8fr) repeat(3, minmax(140px, 1fr)) auto !important;
+}
+
+.master-data-table-wrap #technicianManagementTable {
+  min-width: 900px;
+}
+
+.master-data-table th:nth-child(1) { width: 18%; }
+.master-data-table th:nth-child(2) { width: 14%; }
+.master-data-table th:nth-child(3) { width: 20%; }
+.master-data-table th:nth-child(4) { width: 10%; }
+.master-data-table th:nth-child(5) { width: 24%; }
+.master-data-table th:nth-child(6) { width: 14%; }
+
+.technician-identity-link {
+  appearance: none;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.technician-identity-link strong {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.technician-identity-link small {
+  margin: 0 !important;
+  color: var(--primary) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+}
+
+.technician-identity-link:hover strong,
+.technician-identity-link:focus-visible strong {
+  text-decoration: underline;
+}
+
+.deactivate-action {
+  border-color: #fecaca;
+  background: #fff7f7;
+  color: #b91c1c;
+}
+
+.deactivate-action:hover {
+  border-color: #ef4444;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.deactivate-icon {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: #fff7ed;
+  color: #c2410c;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.deactivate-summary {
+  margin-top: 16px;
+  padding: 13px;
+  border: 1px solid #fed7aa;
+  border-radius: 12px;
+  background: #fff7ed;
+  color: #9a3412;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+}
+
+@media (max-width: 1280px) {
+  .technician-management-kpis.master-data-kpis {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .master-data-filters {
+    grid-template-columns: minmax(240px, 1.5fr) repeat(2, minmax(130px, 1fr)) minmax(110px, .8fr) auto !important;
+  }
+}
+
+@media (max-width: 1050px) {
+  .technician-management-kpis.master-data-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .master-data-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  .master-data-filters .search-field {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 620px) {
+  .technician-management-kpis.master-data-kpis,
+  .master-data-filters,
+  .master-data-filters .search-field {
+    grid-template-columns: 1fr !important;
+    grid-column: auto;
+  }
+}
+
+/* =====================================================================
+   Technician Management shared dashboard title spacing
+   Keep the management page scrollable, but make its title area use the
+   exact desktop spacing and typography of the four operational dashboards.
+   ===================================================================== */
+@media (min-width: 901px) {
+  body.technician-management-body:not(.admin-detail-page) .main.dashboard-page {
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 12px 20px 24px !important;
+  }
+
+  body.technician-management-body:not(.admin-detail-page) .topbar {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    height: 70px !important;
+    min-height: 70px !important;
+    max-height: 70px !important;
+    margin: 0 0 10px !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 18px !important;
+    overflow: visible !important;
+  }
+
+  body.technician-management-body:not(.admin-detail-page) .topbar-heading {
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body.technician-management-body:not(.admin-detail-page) .topbar h1 {
+    margin: 0 !important;
+    padding: 0 !important;
+    color: #111827 !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 25px !important;
+    font-weight: 800 !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.035em !important;
+    white-space: nowrap !important;
+  }
+
+  body.technician-management-body:not(.admin-detail-page) .topbar p {
+    margin: 2px 0 0 !important;
+    padding: 0 !important;
+    color: #6b7280 !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  body.technician-management-body:not(.admin-detail-page) .admin-topbar-actions {
+    height: 70px !important;
+    min-height: 70px !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  body.technician-management-body:not(.admin-detail-page) .technician-management-kpis {
+    margin-top: 0 !important;
+  }
+}
